@@ -1,4 +1,7 @@
 import './style.css';
+import { useState } from 'react';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { IoMdArrowDropup } from 'react-icons/io';
 
 interface doctorDataProp {
   speciality: string;
@@ -17,10 +20,21 @@ export const Doctor: React.FC<doctorDataProp> = ({
   email,
   frequency,
 }) => {
+  const [detailHidden, setDetailHidden] = useState<boolean>(true);
   return (
     <div className="doctor">
-      <h3 className="doctor__title">{speciality}</h3>
-      <ul className="doctor__data">
+      <h3 className="doctor__title">
+        {speciality}
+        <span onClick={() => setDetailHidden(!detailHidden)}>
+          {detailHidden ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
+        </span>
+      </h3>
+
+      <ul
+        className={
+          detailHidden ? 'doctor__data doctor__data--hidden' : 'doctor__data '
+        }
+      >
         <li>
           <strong>Jméno: </strong> {name}
         </li>
