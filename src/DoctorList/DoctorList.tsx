@@ -40,17 +40,16 @@ const doctorListData: doctorListDataProp[] = [
 export const DoctorList: React.FC = () => (
   <>
     <h2>Seznam doktorů</h2>
-    {doctorListData.map((doctor) => (
-      <>
-        <Doctor
-          speciality={doctor.speciality}
-          name={doctor.name}
-          address={doctor.address}
-          phone={doctor.phone}
-          email={doctor.email}
-          frequency={doctor.frequency}
-        />
-      </>
+    {doctorListData.map((doctor, index) => (
+      <Doctor
+        key={index}
+        speciality={doctor.speciality}
+        name={doctor.name}
+        address={doctor.address}
+        phone={doctor.phone}
+        email={doctor.email}
+        frequency={doctor.frequency}
+      />
     ))}
   </>
 );

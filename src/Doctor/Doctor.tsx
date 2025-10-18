@@ -18,12 +18,10 @@ export const Doctor: React.FC<doctorDataProp> = ({
   frequency,
 }) => {
   return (
-    <p className="doctor">
+    <div className="doctor">
+      <h3 className="doctor__title">{speciality}</h3>
       <ul className="doctor__data">
         <li>
-          <li>
-            <h3 className="doctor__title">{speciality}</h3>
-          </li>
           <strong>Jméno: </strong> {name}
         </li>
         <li>
@@ -39,6 +37,6 @@ export const Doctor: React.FC<doctorDataProp> = ({
           <strong>Pravidelnost prohlídek:</strong> {frequency}
         </li>
       </ul>
-    </p>
+    </div>
   );
 };
