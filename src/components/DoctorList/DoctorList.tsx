@@ -1,5 +1,8 @@
 import type React from 'react';
+import { Link } from 'react-router';
+import './style.css';
 import { Doctor } from '../Doctor/Doctor';
+import { FaPlus } from 'react-icons/fa';
 
 interface doctorListDataProp {
   speciality: string;
@@ -51,5 +54,11 @@ export const DoctorList: React.FC = () => (
         frequency={doctor.frequency}
       />
     ))}
+
+    <Link to="./addDoctor">
+      <button className="doctorList__newDoctor">
+        <FaPlus />
+      </button>
+    </Link>
   </>
 );
