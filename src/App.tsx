@@ -1,6 +1,6 @@
 import './App.css';
 import { DoctorList } from './components/DoctorList/DoctorList';
-import { AddDoctorPage } from './pages/AddDoctorPage/AddDoctorPage';
+
 const App = () => {
   return (
     <>
