@@ -1,5 +1,5 @@
 import './App.css';
-import { DoctorList } from './DoctorList/doctorList';
+import { DoctorList } from './DoctorList/DoctorList';
 const App = () => {
   return (
     <>

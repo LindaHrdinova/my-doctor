@@ -1,5 +1,5 @@
 import type React from 'react';
-import { Doctor } from '../Doctor/doctor';
+import { Doctor } from '../Doctor/Doctor';
 
 interface doctorListDataProp {
   speciality: string;
