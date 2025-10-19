@@ -4,15 +4,22 @@ import './index.css';
 import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import { AddDoctorPage } from './pages/AddDoctorPage/AddDoctorPage.tsx';
+import { DoctorList } from './components/DoctorList/DoctorList.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-  },
-  {
-    path: '/addDoctor',
-    element: <AddDoctorPage />,
+    children: [
+      {
+        path: '/',
+        element: <DoctorList />,
+      },
+      {
+        path: '/addDoctor',
+        element: <AddDoctorPage />,
+      },
+    ],
   },
 ]);
 

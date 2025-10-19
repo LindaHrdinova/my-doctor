@@ -1,0 +1,28 @@
+.addDoctorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.addDoctorForm__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.addDoctorForm__column>label {
+  text-align: left;
+}
+
+.addDoctorForm__input {
+  border: solid 2px var(--white-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 7px;
+}
+
+.addDoctorForm__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 10px;
+}

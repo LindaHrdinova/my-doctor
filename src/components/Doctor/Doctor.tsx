@@ -42,7 +42,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
           <strong>Jméno: </strong> {name}
         </li>
         <li>
-          <strong>Ordinace:</strong> {address}
+          <strong>Adresa:</strong> {address}
         </li>
         <li>
           <strong>Telefon:</strong> <a href={`tel:${phone}`}>{phone}</a>

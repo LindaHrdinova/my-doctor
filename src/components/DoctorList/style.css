@@ -4,13 +4,13 @@
   padding: 15px;
   border: 0;
   background-color: var(--white-color);
-  color: var(--mainDark-color);
+  color: var(--dark-color);
   font-size: 1.5rem;
   box-shadow: var(--box-shadow);
 }
 
 .doctorList__newDoctor:hover,
 .doctorList__newDoctor:active {
-  background-color: var(--mainDark-color);
+  background-color: var(--dark-color);
   color: var(--white-color);
 }

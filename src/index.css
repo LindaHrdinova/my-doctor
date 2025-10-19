@@ -16,7 +16,10 @@
   --light-color: #d1dbda;
   --main-color: #09ac96;
   /*18b8a3*/
-  --mainDark-color: #054444;
+
+  --mainDark-color: #008674;
+
+  --dark-color: #054444;
   /*#115b3c*/
 
   --box-shadow: 0 0 10px #0003;
@@ -25,7 +28,7 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
   min-width: 320px;
 }
 
@@ -34,7 +37,8 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+button,
+input[type="submit"] {
   width: 100%;
   border-radius: 10px;
   padding: 15px;
@@ -42,13 +46,14 @@ button {
   box-shadow: var(--box-shadow);
 }
 
-button:hover {
+button:hover,
+input[type="submit"]:hover {
   color: var(--main-color)
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: var(--mainDark-color);
+    color: var(--dark-color);
     background-color: var(--light-color);
   }
 
@@ -57,11 +62,13 @@ button:hover {
   }
 
   a:hover {
-    color: var(--mainDark-color);
+    color: var(--dark-color);
   }
 
-  button {
+  button,
+  input[type="submit"] {
     background-color: #f9f9f9;
+    color: var(--dark-color)
   }
 }
 

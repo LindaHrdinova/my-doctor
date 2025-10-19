@@ -1,11 +1,11 @@
 import './App.css';
-import { DoctorList } from './components/DoctorList/DoctorList';
+import { Outlet } from 'react-router';
 
 const App = () => {
   return (
     <>
       <h1>Můj doctor</h1>
-      <DoctorList />
+      <Outlet />
     </>
   );
 };
