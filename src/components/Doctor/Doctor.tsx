@@ -23,9 +23,12 @@ export const Doctor: React.FC<doctorDataProp> = ({
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
   return (
     <div className="doctor">
-      <h3 className="doctor__title">
+      <h3
+        className="doctor__title onClick__style"
+        onClick={() => setDetailHidden(!detailHidden)}
+      >
         {speciality}
-        <span onClick={() => setDetailHidden(!detailHidden)}>
+        <span>
           {detailHidden ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
         </span>
       </h3>

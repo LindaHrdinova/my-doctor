@@ -11,6 +11,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --white-color: #fff8f8;
+  --light-color: #d1dbda;
+  --main-color: #09ac96;
+  /*18b8a3*/
+  --mainDark-color: #054444;
+  /*#115b3c*/
+
+  --box-shadow: 0 0 10px #0003;
 }
 
 body {
@@ -25,17 +34,37 @@ h1 {
   line-height: 1.1;
 }
 
+button {
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px;
+  border: 0;
+  box-shadow: var(--box-shadow);
+}
+
+button:hover {
+  color: var(--main-color)
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--mainDark-color);
+    background-color: var(--light-color);
+  }
+
+  a {
+    color: var(--white-color);
   }
 
   a:hover {
-    color: #747bff;
+    color: var(--mainDark-color);
   }
 
   button {
     background-color: #f9f9f9;
   }
+}
+
+.onClick__style {
+  cursor: pointer;
 }

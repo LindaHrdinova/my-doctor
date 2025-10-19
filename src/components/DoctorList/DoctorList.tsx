@@ -56,7 +56,7 @@ export const DoctorList: React.FC = () => (
     ))}
 
     <Link to="./addDoctor">
-      <button className="doctorList__newDoctor">
+      <button className="doctorList__newDoctor onClick__style">
         <FaPlus />
       </button>
     </Link>
