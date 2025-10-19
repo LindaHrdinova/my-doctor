@@ -15,6 +15,16 @@
 
 .addDoctorForm__input {
   border: solid 2px var(--white-color);
+  background-color: var(--white-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 7px;
+}
+
+.addDoctor__autoComplete>input {
+  width: 100%;
+  border: solid 2px var(--white-color);
+  background-color: var(--white-color);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
   padding: 7px;

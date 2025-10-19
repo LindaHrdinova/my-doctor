@@ -1,14 +1,45 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
+import { AutoComplete } from 'primereact/autocomplete';
 import './style.css';
 
 export const AddDoctorForm = () => {
+  const [specialistValue, setSpecialistValue] = useState('');
+  const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
+  const specialityList: string[] = [
+    'Stomatologie',
+    'Gynekologie',
+    'Revmatologie',
+    'Urogynekologie',
+    'Urologie',
+    'Kardiologie',
+    'Geriatrie',
+  ];
+
+  const searchSpeciality = (e: { query: string }) => {
+    const query = e.query.toLocaleLowerCase();
+
+    const suggestion = specialityList.filter((specialist) =>
+      specialist.toLowerCase().includes(query),
+    );
+
+    setSuggestDocSpec(suggestion);
+  };
+
   return (
     <>
-      <h3>Přidat doktora</h3>
       <form className="addDoctorForm">
         <div className="addDoctorForm__column">
-          <label>Specialista:</label>
-          <input type="text" className="addDoctorForm__input" required />
+          <label htmlFor="docSpeciality">Specialista:</label>
+          <AutoComplete
+            inputId="docSpeciality"
+            className="addDoctor__autoComplete"
+            value={specialistValue}
+            suggestions={suggestDocSpec}
+            completeMethod={searchSpeciality}
+            onChange={(e) => setSpecialistValue(e.value)}
+            required
+          />
         </div>
         <div className="addDoctorForm__column">
           <label>Jméno:</label>
