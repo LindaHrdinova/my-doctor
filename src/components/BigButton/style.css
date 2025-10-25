@@ -2,7 +2,7 @@
   width: 100%;
   border-radius: 10px;
   padding: 15px;
-  margin: 10px;
+  margin: 10px 0;
   border: 0;
   background-color: var(--white-color);
   color: var(--dark-color);
@@ -13,5 +13,13 @@
 .doctorList__newDoctor:hover,
 .doctorList__newDoctor:active {
   background-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+.bigButton--primary {
+  background-color: var(--main-color);
+}
+
+.bigButton--primary:hover {
   color: var(--white-color);
 }

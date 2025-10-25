@@ -6,10 +6,26 @@ export const HomePage = () => {
     <main>
       <h2>Homepage</h2>
       <NextAppointment />
-      <BigButton textButton="Seznam termínů" urlButton="appointments" />
-      <BigButton textButton="Přidat termín" urlButton="new-appointment" />
-      <BigButton textButton="Seznam doktorů" urlButton="doctors" />
-      <BigButton textButton="Přidat doktora" urlButton="new-doctor" />
+      <BigButton
+        textButton="Seznam termínů"
+        urlButton="appointments"
+        primaryButton={true}
+      />
+      <BigButton
+        textButton="Přidat termín"
+        urlButton="new-appointment"
+        primaryButton={true}
+      />
+      <BigButton
+        textButton="Seznam doktorů"
+        urlButton="doctors"
+        primaryButton={true}
+      />
+      <BigButton
+        textButton="Přidat doktora"
+        urlButton="new-doctor"
+        primaryButton={true}
+      />
     </main>
   );
 };

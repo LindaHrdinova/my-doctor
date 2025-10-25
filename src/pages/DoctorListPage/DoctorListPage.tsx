@@ -60,6 +60,6 @@ export const DoctorList: React.FC = () => (
         <FaPlus />
       </button>
     </Link>
-    <BigButton urlButton="../" textButton="Domů" />
+    <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
   </>
 );

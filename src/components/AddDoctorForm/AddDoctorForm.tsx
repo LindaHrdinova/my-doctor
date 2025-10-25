@@ -1,20 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
+import { specialityList } from '../../data/specialityList';
 import './style.css';
 
 export const AddDoctorForm = () => {
   const [specialistValue, setSpecialistValue] = useState('');
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
-  const specialityList: string[] = [
-    'Stomatologie',
-    'Gynekologie',
-    'Revmatologie',
-    'Urogynekologie',
-    'Urologie',
-    'Kardiologie',
-    'Geriatrie',
-  ];
 
   const searchSpeciality = (e: { query: string }) => {
     const query = e.query.toLocaleLowerCase();

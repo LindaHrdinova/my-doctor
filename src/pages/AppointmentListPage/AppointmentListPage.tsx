@@ -5,8 +5,12 @@ export const AppointmentList = () => {
     <>
       <h2>Seznam termínů</h2>
       <p>Tady bude seznam termínů.</p>
-      <BigButton textButton="Přidat termín" urlButton="new-appointment" />
-      <BigButton urlButton="../" textButton="Domů" />
+      <BigButton
+        textButton="Přidat termín"
+        urlButton="new-appointment"
+        primaryButton={false}
+      />
+      <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
     </>
   );
 };
