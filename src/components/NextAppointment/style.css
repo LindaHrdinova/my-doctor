@@ -1,0 +1,11 @@
+.nextAppointment {
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px 0;
+  margin: 10px;
+  border: 0;
+  background-color: var(--white-color);
+  color: var(--dark-color);
+  font-size: 1.5rem;
+  box-shadow: var(--box-shadow);
+}

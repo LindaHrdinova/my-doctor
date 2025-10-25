@@ -1,7 +1,7 @@
 import type React from 'react';
 import { Link } from 'react-router';
-import './style.css';
-import { Doctor } from '../Doctor/Doctor';
+import { Doctor } from '../../components/Doctor/Doctor';
+import { BigButton } from '../../components/BigButton/BigButton';
 import { FaPlus } from 'react-icons/fa';
 
 interface doctorListDataProp {
@@ -55,10 +55,11 @@ export const DoctorList: React.FC = () => (
       />
     ))}
 
-    <Link to="./addDoctor">
+    <Link to="../new-doctor">
       <button className="doctorList__newDoctor onClick__style">
         <FaPlus />
       </button>
     </Link>
+    <BigButton urlButton="../" textButton="Domů" />
   </>
 );

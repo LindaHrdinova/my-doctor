@@ -20,7 +20,7 @@ export const AddDoctorForm = () => {
     const query = e.query.toLocaleLowerCase();
 
     const suggestion = specialityList.filter((specialist) =>
-      specialist.toLowerCase().includes(query),
+      specialist.toLowerCase().startsWith(query),
     );
 
     setSuggestDocSpec(suggestion);
@@ -47,7 +47,7 @@ export const AddDoctorForm = () => {
         </div>
         <div className="addDoctorForm__column">
           <label>Adresa:</label>
-          <input type="text" className="addDoctorForm__input" required />
+          <input type="text" className="addDoctorForm__input" />
         </div>
         <div className="addDoctorForm__column">
           <label>Telefon:</label>
@@ -59,12 +59,12 @@ export const AddDoctorForm = () => {
         </div>
         <div className="addDoctorForm__column">
           <label>Pravidelnost prohlídek:</label>
-          <input type="text" className="addDoctorForm__input" required />
+          <input type="text" className="addDoctorForm__input" />
         </div>
         <div className="addDoctorForm__buttons">
           <input
             type="submit"
-            className="addDoctorForm__buttons"
+            className="addDoctorForm__buttons onClick__style"
             value="Přidat doktora"
           />
           <Link to="/">
