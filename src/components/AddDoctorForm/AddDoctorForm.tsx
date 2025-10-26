@@ -139,7 +139,10 @@ export const AddDoctorForm = () => {
             type="submit"
             className="onClick__style button button--primary"
             value="Přidat doktora"
-            onClick={addDoctor}
+            onClick={() => {
+              addDoctor;
+              console.log(status);
+            }}
           />
           <Link to="/" className="onClick__style button">
             Domů
