@@ -14,7 +14,7 @@
 }
 
 .addDoctorForm__input {
-  border: solid 2px var(--white-color);
+  border: solid 2px var(--gray-color);
   background-color: var(--white-color);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
@@ -65,8 +65,18 @@ input.p-inputtext {
 
 @media (prefers-color-scheme: light) {
 
-  .addDoctorForm__input {
-    background-color: aqua;
+  .addDoctorForm__input,
+  input.p-inputtext {
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+  }
+
+  .p-autocomplete-items {
+    background-color: var(--grayLight-color);
+  }
+
+  .p-autocomplete-item:hover {
+    color: var(--main-color);
   }
 
 }

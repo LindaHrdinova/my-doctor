@@ -55,10 +55,11 @@ export const DoctorList: React.FC = () => (
       />
     ))}
 
-    <Link to="../new-doctor">
-      <a className="button button--primary doctorList__newDoctor onClick__style">
-        <FaPlus />
-      </a>
+    <Link
+      to="../new-doctor"
+      className="button button--primary doctorList__newDoctor onClick__style"
+    >
+      <FaPlus />
     </Link>
     <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
   </>

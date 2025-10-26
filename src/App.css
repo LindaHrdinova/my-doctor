@@ -33,3 +33,25 @@
 .button--primary:hover {
   background-color: var(--main-color);
 }
+
+@media (prefers-color-scheme: light) {
+  .button {
+    background-color: var(--grayLight-color);
+    color: var(--black-color);
+  }
+
+  .button:hover {
+    background-color: var(--white-color);
+    color: var(--black-color);
+  }
+
+  .button--primary {
+    background-color: var(--main-color);
+    color: var(--white-color)
+  }
+
+  .button--primary:hover {
+    background-color: var(--mainLight-color);
+    color: var(--white-color);
+  }
+}

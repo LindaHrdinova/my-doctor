@@ -30,3 +30,17 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media (prefers-color-scheme: light) {
+  .doctor {
+    background-color: var(--grayLight-color);
+    color: var(--black-color);
+    box-shadow: var(--box-shadow);
+  }
+
+  .doctor__title {
+    margin: 0 0 10px;
+    border-bottom: solid 2px var(--black-color);
+  }
+
+}
