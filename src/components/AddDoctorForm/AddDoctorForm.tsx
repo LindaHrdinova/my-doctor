@@ -7,15 +7,6 @@ import './style.css';
 
 export const AddDoctorForm = () => {
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
-  /*
-  id: number;
-  speciality: string;
-  name: string;
-  address: string;
-  addressDetail: string;
-  phone: string;
-  email: string;
-  frequency: string;*/
 
   const [speciality, setSpeciality] = useState('');
   const [name, setName] = useState('');
@@ -39,7 +30,7 @@ export const AddDoctorForm = () => {
       });
 
       setStatus(
-        `Doctor ${name ? name : speciality} successfully added. Got id ${id}`,
+        `Doctor ${name ? name : speciality} successfully added. Got id ${id}.`,
       );
       setSpeciality('');
       setName('');
@@ -65,6 +56,7 @@ export const AddDoctorForm = () => {
 
   return (
     <>
+      {status ? status : null}
       <form className="addDoctorForm">
         <div className="addDoctorForm__column">
           <label htmlFor="docSpeciality">Specialista:</label>
@@ -136,11 +128,11 @@ export const AddDoctorForm = () => {
         </div>
         <div className="addDoctorForm__buttons ">
           <input
-            type="submit"
+            type="button"
             className="onClick__style button button--primary"
             value="Přidat doktora"
             onClick={() => {
-              addDoctor;
+              addDoctor();
               console.log(status);
             }}
           />
