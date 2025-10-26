@@ -4,22 +4,37 @@
   padding: 15px;
   margin: 10px 0;
   border: 0;
-  background-color: var(--white-color);
-  color: var(--dark-color);
+  background-color: var(--blackLight-color);
+  color: var(--white-color);
   font-size: 1.5rem;
   box-shadow: var(--box-shadow);
 }
 
-.doctorList__newDoctor:hover,
-.doctorList__newDoctor:active {
-  background-color: var(--dark-color);
+.bigButton:hover {
+  background-color: var(--gray-color);
   color: var(--white-color);
 }
 
 .bigButton--primary {
-  background-color: var(--main-color);
+  background-color: var(--mainDark-color);
 }
 
 .bigButton--primary:hover {
   color: var(--white-color);
+  background-color: var(--main-color);
+}
+
+@media (prefers-color-scheme: light) {
+  .bigButton {
+    background-color: var(--white-color);
+    color: var(--dark-color);
+  }
+
+  .bigButton--primary {
+    background-color: var(--main-color);
+  }
+
+  .bigButton--primary:hover {
+    color: var(--white-color);
+  }
 }

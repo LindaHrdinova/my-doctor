@@ -20,6 +20,7 @@ export const specialityList: string[] = [
   'Kardiochirurgie',
   'Kardiologie',
   'Koloproktologie',
+  'Logopedie',
   'Nefrologie',
   'Neonatologie',
   'Neurochirugie',

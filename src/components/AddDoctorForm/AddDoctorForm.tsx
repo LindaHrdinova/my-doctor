@@ -53,14 +53,14 @@ export const AddDoctorForm = () => {
           <label>Pravidelnost prohlídek:</label>
           <input type="text" className="addDoctorForm__input" />
         </div>
-        <div className="addDoctorForm__buttons">
+        <div className="addDoctorForm__buttons ">
           <input
             type="submit"
-            className="addDoctorForm__buttons onClick__style"
+            className="onClick__style button button--primary"
             value="Přidat doktora"
           />
-          <Link to="/">
-            <button className="onClick__style">Zpátky na hlavní stránku</button>
+          <Link to="/" className="onClick__style button">
+            Zpátky na hlavní stránku
           </Link>
         </div>
       </form>

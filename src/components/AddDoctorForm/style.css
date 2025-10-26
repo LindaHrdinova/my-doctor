@@ -36,3 +36,37 @@
   grid-template-rows: 1fr;
   gap: 10px;
 }
+
+.addDoctorForm__input,
+input.p-inputtext {
+  background-color: var(--blackLight-color);
+  border-color: var(--blackLight-color);
+  box-shadow: var(--box-shadow)
+}
+
+.p-autocomplete-item {
+  padding: 5px;
+}
+
+.p-autocomplete-item:hover {
+  color: var(--lightGreen-color);
+}
+
+.p-autocomplete-panel {
+  padding: 0 7px;
+}
+
+.p-autocomplete-items {
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  background-color: var(--gray-color);
+  box-shadow: var(--box-shadow);
+}
+
+@media (prefers-color-scheme: light) {
+
+  .addDoctorForm__input {
+    background-color: aqua;
+  }
+
+}

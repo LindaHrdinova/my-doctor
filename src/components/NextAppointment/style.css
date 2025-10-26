@@ -4,8 +4,15 @@
   padding: 15px 0;
   margin: 10px 0;
   border: 0;
-  background-color: var(--white-color);
-  color: var(--dark-color);
+  background-color: var(--blackLight-color);
+  color: var(--white-color);
   font-size: 1.5rem;
   box-shadow: var(--box-shadow);
+}
+
+@media (prefers-color-scheme: light) {
+  .nextAppointment {
+    background-color: var(--white-color);
+    color: var(--dark-color);
+  }
 }

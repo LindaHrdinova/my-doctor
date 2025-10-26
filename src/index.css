@@ -3,32 +3,42 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --white-color: #F9FCFB;
+  --light-color: #d1dbda;
+  --lightGreen-color: #35e6ce;
+  --mainLight-color: #09ac96;
+  /* nice shades of blue -> #094, #1f82ac*/
+  --main-color: #008674;
+  --mainDark-color: #054444;
+  /*#115b3c*/
+  --gray-color: #535353;
+  --blackLight-color: #3F3F3F;
+  --black-color: #242424;
+  /*18b8a3*/
+
+  --box-shadow: 0 0 10px #0003;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --white-color: #fff8f8;
-  --light-color: #d1dbda;
-  --main-color: #09ac96;
-  /*18b8a3*/
 
-  --mainDark-color: #008674;
-
-  --dark-color: #054444;
-  /*#115b3c*/
-
-  --box-shadow: 0 0 10px #0003;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--black-color);
 }
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
+}
+
+a {
+  color: var(--lightGreen-color)
+}
+
+a:hover {
+  color: var(--mainLight-color)
 }
 
 h1 {
@@ -43,11 +53,6 @@ input[type="submit"] {
   padding: 15px;
   border: 0;
   box-shadow: var(--box-shadow);
-}
-
-button:hover,
-input[type="submit"]:hover {
-  color: var(--main-color)
 }
 
 @media (prefers-color-scheme: light) {
