@@ -7,6 +7,7 @@ interface doctorDataProp {
   speciality: string;
   name: string;
   address: string;
+  addressDetail: string;
   phone: string;
   email: string;
   frequency: string;
@@ -16,6 +17,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
   speciality,
   name,
   address,
+  addressDetail,
   phone,
   email,
   frequency,
@@ -41,18 +43,31 @@ export const Doctor: React.FC<doctorDataProp> = ({
         <li>
           <strong>Jméno: </strong> {name}
         </li>
-        <li>
-          <strong>Adresa:</strong> {address}
-        </li>
-        <li>
-          <strong>Telefon:</strong> <a href={`tel:${phone}`}>{phone}</a>
-        </li>
-        <li>
-          <strong>E-mail:</strong> <a href={`mailto:${email}`}>{email}</a>
-        </li>
-        <li>
-          <strong>Pravidelnost prohlídek:</strong> {frequency}
-        </li>
+        {address ? (
+          <li>
+            <strong>Adresa:</strong> {address}
+          </li>
+        ) : null}
+        {addressDetail ? (
+          <li>
+            <strong>Poznámka k adrese:</strong> {addressDetail}
+          </li>
+        ) : null}
+        {phone ? (
+          <li>
+            <strong>Telefon:</strong> <a href={`tel:${phone}`}>{phone}</a>
+          </li>
+        ) : null}
+        {email ? (
+          <li>
+            <strong>E-mail:</strong> <a href={`mailto:${email}`}>{email}</a>
+          </li>
+        ) : null}
+        {frequency ? (
+          <li>
+            <strong>Pravidelnost prohlídek:</strong> {frequency}
+          </li>
+        ) : null}
       </ul>
     </div>
   );
