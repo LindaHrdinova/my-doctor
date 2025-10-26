@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# My doctor/Můj doktor
+## 🇬🇧 App description
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+My Doctor is a personal health diary for managing your own doctors and visit dates. The user manually enters all information — the app is not connected to any clinic or external database.
 
-Currently, two official plugins are available:
+### Features (current)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Add your own doctor (name, specialty, contact, notes)
 
-## React Compiler
+Light / dark mode based on system (prefers-color-scheme)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Features (planned / in progress)
 
-## Expanding the ESLint configuration
+Add visit appointment (date, time, doctor, notes)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Upcoming appointments overview
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Dexie.js – offline data storage via IndexedDB
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Reminder for long-unvisited doctors (e.g. dentist 2× year → 8 months since last visit → suggest booking)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Potential doctor detail page with history
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🇨🇿 Popis aplikace
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Můj doktor je osobní zdravotní diář, který slouží k ukládání kontaktů na lékaře a termínů návštěv. Uživatel si vše zapisuje sám – aplikace není napojená na žádné kliniky ani databáze.
+
+### Funkce (aktuální)
+
+Přidání vlastního lékaře (jméno, specializace, kontakt, poznámka)
+
+Světlý/tmavý režim dle systému (prefers-color-scheme)
+
+### Funkce (plánované / in progress)
+Přidání termínu návštěvy (datum, čas, lékař, poznámky)
+
+Seznam nadcházejících termínů
+
+Dexie.js – ukládání dat offline do IndexedDB
+
+Připomenutí dlouho nenavštívených lékařů (např. zubař 2× ročně → 8 měsíců neaktivní → upozornění)
+
+Možná karta lékaře s historií návštěv
+
+## Tech Stack
+
+React + TypeScript + Vite
+
+(soon) Dexie.js
+
+Dark/light mode
