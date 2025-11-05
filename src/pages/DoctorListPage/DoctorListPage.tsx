@@ -14,6 +14,7 @@ interface doctorListDataProp {
   phone: string;
   email: string;
   frequency: string;
+  current: boolean;
 }
 
 const doctorListData: doctorListDataProp[] = [
@@ -25,15 +26,17 @@ const doctorListData: doctorListDataProp[] = [
     phone: '231 231 231',
     email: 'email@email.com',
     frequency: '2x ročně',
+    current: true,
   },
   {
     speciality: 'Dermatologie',
     name: 'MuDr. Klára Kožená',
-    address: 'Hradeckých 822/5, 140 00, Praha',
+    address: 'Hradeckých 882/5, 140 00, Praha',
     addressDetail: '',
     phone: '200 525 200',
     email: 'mail@kozni.com',
     frequency: 'nepravidelné',
+    current: true,
   },
   {
     speciality: 'Kardiologie',
@@ -43,29 +46,20 @@ const doctorListData: doctorListDataProp[] = [
     phone: '300 232 300',
     email: 'srdecna@doktorka.com',
     frequency: '4x ročně',
+    current: false,
   },
 ];
-/*
-export const DoctorListFromDB = () => {
-  return (
-    <ul>
-      {doctors?.map((doctor) => (
-        <li key={doctor.id}>
-          {doctor.speciality} {doctor.name}
-        </li>
-      ))}
-    </ul>
-  );
-};
-*/
+
 export const DoctorList: React.FC = () => {
   const doctors = useLiveQuery(() => db.doctors.toArray());
   return (
     <>
       <h2>Seznam doktorů</h2>
+      {/* data from db */}
       {doctors?.map((doctor) => (
         <Doctor
           key={doctor.id}
+          id={doctor.id}
           speciality={doctor.speciality}
           name={doctor.name}
           address={doctor.address}
@@ -73,11 +67,13 @@ export const DoctorList: React.FC = () => {
           phone={doctor.phone}
           email={doctor.email}
           frequency={doctor.frequency}
+          current={doctor.current}
         />
       ))}
       {doctorListData.map((doctor, index) => (
         <Doctor
           key={index}
+          id={index}
           speciality={doctor.speciality}
           name={doctor.name}
           address={doctor.address}
@@ -85,6 +81,7 @@ export const DoctorList: React.FC = () => {
           phone={doctor.phone}
           email={doctor.email}
           frequency={doctor.frequency}
+          current={doctor.current}
         />
       ))}
 

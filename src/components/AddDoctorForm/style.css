@@ -72,7 +72,7 @@ input.p-inputtext {
   }
 
   .p-autocomplete-items {
-    background-color: var(--grayLight-color);
+    background-color: var(--whiteDark-color);
   }
 
   .p-autocomplete-item:hover {

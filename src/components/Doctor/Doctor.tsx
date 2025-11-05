@@ -2,8 +2,10 @@ import './style.css';
 import { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMdArrowDropup } from 'react-icons/io';
+import { Switcher } from '../Switcher/Switcher';
 
 interface doctorDataProp {
+  id: number;
   speciality: string;
   name: string;
   address: string;
@@ -11,9 +13,11 @@ interface doctorDataProp {
   phone: string;
   email: string;
   frequency: string;
+  current: boolean;
 }
 
 export const Doctor: React.FC<doctorDataProp> = ({
+  id,
   speciality,
   name,
   address,
@@ -21,10 +25,11 @@ export const Doctor: React.FC<doctorDataProp> = ({
   phone,
   email,
   frequency,
+  current,
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
   return (
-    <div className="doctor">
+    <div className={current ? 'doctor' : 'doctor doctor--inactive'}>
       <h3
         className="doctor__title onClick__style"
         onClick={() => setDetailHidden(!detailHidden)}
@@ -40,9 +45,11 @@ export const Doctor: React.FC<doctorDataProp> = ({
           detailHidden ? 'doctor__data doctor__data--hidden' : 'doctor__data '
         }
       >
-        <li>
-          <strong>Jméno: </strong> {name}
-        </li>
+        {name ? (
+          <li>
+            <strong>Jméno: </strong> {name}
+          </li>
+        ) : null}
         {address ? (
           <li>
             <strong>Adresa:</strong> {address}
@@ -68,6 +75,9 @@ export const Doctor: React.FC<doctorDataProp> = ({
             <strong>Pravidelnost prohlídek:</strong> {frequency}
           </li>
         ) : null}
+        <li>
+          <Switcher current={current} id={id} />
+        </li>
       </ul>
     </div>
   );

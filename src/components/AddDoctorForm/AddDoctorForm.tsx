@@ -16,6 +16,7 @@ export const AddDoctorForm = () => {
   const [email, setEmail] = useState('');
   const [frequency, setFrequency] = useState('');
   const [status, setStatus] = useState('');
+  const current = true;
 
   const addDoctor = async () => {
     try {
@@ -27,6 +28,7 @@ export const AddDoctorForm = () => {
         phone,
         email,
         frequency,
+        current,
       });
 
       setStatus(
@@ -57,7 +59,9 @@ export const AddDoctorForm = () => {
   return (
     <>
       {status ? status : null}
-      <form className="addDoctorForm">
+      <form
+        className="addDoctorForm" /* doplnit onSubmit - vyřeší se problém s validací? Vyzkoušet */
+      >
         <div className="addDoctorForm__column">
           <label htmlFor="docSpeciality">Specialista:</label>
           <AutoComplete
@@ -128,11 +132,12 @@ export const AddDoctorForm = () => {
         </div>
         <div className="addDoctorForm__buttons ">
           <input
-            type="button"
+            type="submit"
             className="onClick__style button button--primary"
             value="Přidat doktora"
-            onClick={() => {
-              addDoctor();
+            onClick={(e) => {
+              e.preventDefault;
+              addDoctor(); /* zkontrolovat validaci */
               console.log(status);
             }}
           />

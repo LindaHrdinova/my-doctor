@@ -11,7 +11,8 @@
   --main-color: #008674;
   --mainDark-color: #054444;
   /*#115b3c*/
-  --grayLight-color: #e3e3e3;
+  --whiteDark-color: #eeeeee;
+  --grayLight-color: #dadada;
   --gray-color: #535353;
   --blackLight-color: #3F3F3F;
   --black-color: #242424;
@@ -32,6 +33,8 @@
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 a {

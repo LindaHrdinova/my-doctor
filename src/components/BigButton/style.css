@@ -27,7 +27,7 @@
 @media (prefers-color-scheme: light) {
 
   .bigButton {
-    background-color: var(--grayLight-color);
+    background-color: var(--whiteDark-color);
     color: var(--black-color);
   }
 

@@ -31,9 +31,15 @@
   justify-content: space-between;
 }
 
+.doctor--inactive {
+  color: var(--grayLight-color);
+  background-color: var(--gray-color);
+}
+
+
 @media (prefers-color-scheme: light) {
   .doctor {
-    background-color: var(--grayLight-color);
+    background-color: var(--whiteDark-color);
     color: var(--black-color);
     box-shadow: var(--box-shadow);
   }
@@ -43,4 +49,8 @@
     border-bottom: solid 2px var(--black-color);
   }
 
+  .doctor--inactive {
+    color: var(--blackLight-color);
+    background-color: var(--grayLight-color);
+  }
 }

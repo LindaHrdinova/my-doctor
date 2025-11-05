@@ -1,9 +1,11 @@
 /* save color scheme idea: #36ffd7*/
 
 #root {
-  max-width: 1280px;
+  width: 100%;
+  max-width: 1000px;
   padding: 0.5rem;
   text-align: center;
+
 }
 
 .button {
@@ -36,7 +38,7 @@
 
 @media (prefers-color-scheme: light) {
   .button {
-    background-color: var(--grayLight-color);
+    background-color: var(--whiteDark-color);
     color: var(--black-color);
   }
 
