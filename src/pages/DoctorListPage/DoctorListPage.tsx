@@ -1,5 +1,4 @@
 import type React from 'react';
-import { Link } from 'react-router';
 import { Doctor } from '../../components/Doctor/Doctor';
 import { BigButton } from '../../components/BigButton/BigButton';
 import { FaPlus } from 'react-icons/fa';
