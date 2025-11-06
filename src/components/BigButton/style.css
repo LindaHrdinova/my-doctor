@@ -11,7 +11,7 @@
 }
 
 .bigButton:hover {
-  background-color: var(--gray-color);
+  background-color: var(--black-color);
   color: var(--white-color);
 }
 
@@ -21,7 +21,7 @@
 
 .bigButton--primary:hover {
   color: var(--white-color);
-  background-color: var(--main-color);
+  background-color: var(--mainSuperDark-color);
 }
 
 @media (prefers-color-scheme: light) {

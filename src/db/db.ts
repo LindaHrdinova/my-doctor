@@ -9,7 +9,7 @@ interface DoctorDataProp {
   phone: string;
   email: string;
   frequency: string;
-  current: boolean;
+  current: number /* 0 true, 1 false*/;
 }
 
 interface AppointmentDataProp {

@@ -10,12 +10,15 @@
   /* nice shades of blue -> #094, #1f82ac*/
   --main-color: #008674;
   --mainDark-color: #054444;
+  --mainSuperDark-color: #012929;
   /*#115b3c*/
-  --whiteDark-color: #eeeeee;
-  --grayLight-color: #dadada;
-  --gray-color: #535353;
+  --whiteDark-color: #e9e9e9;
+  --graySuperLight-color: #cfcfcf;
+  --grayLight-color: #c5c5c5;
+  --gray-color: #5e5e5e;
   --blackLight-color: #3F3F3F;
   --black-color: #242424;
+  --blackDark-color: #111111;
   /*18b8a3*/
 
   --box-shadow: 0 0 10px #0003;
@@ -28,7 +31,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--black-color);
+  background-color: var(--blackDark-color);
 }
 
 body {
@@ -38,11 +41,11 @@ body {
 }
 
 a {
-  color: var(--lightGreen-color)
+  color: var(--mainLight-color)
 }
 
 a:hover {
-  color: var(--mainLight-color)
+  color: var(--main-color)
 }
 
 h1 {

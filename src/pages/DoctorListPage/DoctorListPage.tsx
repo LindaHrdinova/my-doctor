@@ -14,7 +14,7 @@ interface doctorListDataProp {
   phone: string;
   email: string;
   frequency: string;
-  current: boolean;
+  current: 0 | 1;
 }
 
 const doctorListData: doctorListDataProp[] = [
@@ -26,7 +26,7 @@ const doctorListData: doctorListDataProp[] = [
     phone: '231 231 231',
     email: 'email@email.com',
     frequency: '2x ročně',
-    current: true,
+    current: 0,
   },
   {
     speciality: 'Dermatologie',
@@ -36,7 +36,7 @@ const doctorListData: doctorListDataProp[] = [
     phone: '200 525 200',
     email: 'mail@kozni.com',
     frequency: 'nepravidelné',
-    current: true,
+    current: 0,
   },
   {
     speciality: 'Kardiologie',
@@ -46,12 +46,12 @@ const doctorListData: doctorListDataProp[] = [
     phone: '300 232 300',
     email: 'srdecna@doktorka.com',
     frequency: '4x ročně',
-    current: false,
+    current: 1,
   },
 ];
 
 export const DoctorList: React.FC = () => {
-  const doctors = useLiveQuery(() => db.doctors.toArray());
+  const doctors = useLiveQuery(() => db.doctors.orderBy('current').toArray());
   return (
     <>
       <h2>Seznam doktorů</h2>

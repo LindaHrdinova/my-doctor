@@ -13,7 +13,7 @@ interface doctorDataProp {
   phone: string;
   email: string;
   frequency: string;
-  current: boolean;
+  current: number;
 }
 
 export const Doctor: React.FC<doctorDataProp> = ({
@@ -29,7 +29,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
   return (
-    <div className={current ? 'doctor' : 'doctor doctor--inactive'}>
+    <div className={current === 0 ? 'doctor' : 'doctor doctor--inactive'}>
       <h3
         className="doctor__title onClick__style"
         onClick={() => setDetailHidden(!detailHidden)}
