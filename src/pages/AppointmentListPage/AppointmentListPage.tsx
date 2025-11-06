@@ -1,3 +1,4 @@
+import { FaPlus } from 'react-icons/fa';
 import { BigButton } from '../../components/BigButton/BigButton';
 
 export const AppointmentList = () => {
@@ -6,9 +7,9 @@ export const AppointmentList = () => {
       <h2>Seznam termínů</h2>
       <p>Tady bude seznam termínů.</p>
       <BigButton
-        textButton="Přidat termín"
+        textButton={<FaPlus />}
         urlButton="new-appointment"
-        primaryButton={false}
+        primaryButton={true}
       />
       <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
     </>

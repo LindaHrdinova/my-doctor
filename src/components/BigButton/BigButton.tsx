@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react';
 import './style.css';
 import { Link } from 'react-router';
 
 interface bigButtonProp {
-  textButton: string;
+  textButton: string | ReactNode;
   urlButton: string;
   primaryButton: boolean;
 }

@@ -16,7 +16,7 @@ export const AddDoctorForm = () => {
   const [email, setEmail] = useState('');
   const [frequency, setFrequency] = useState('');
   const [status, setStatus] = useState('');
-  const current = true;
+  const current = 0;
 
   const addDoctor = async () => {
     try {
