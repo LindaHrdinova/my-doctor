@@ -4,6 +4,13 @@
   gap: 15px;
 }
 
+.addDoctorForm__label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+
 .addDoctorForm__column {
   display: flex;
   flex-direction: column;
