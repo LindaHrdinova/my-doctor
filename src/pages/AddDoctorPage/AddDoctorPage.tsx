@@ -2,9 +2,9 @@ import './style.css';
 import { AddDoctorForm } from '../../components/AddDoctorForm/AddDoctorForm';
 import { useState } from 'react';
 
-const [addDoctorStatus, setAddDoctorStatus] = useState<string>('');
-
 export const AddDoctorPage = () => {
+  const [addDoctorStatus, setAddDoctorStatus] = useState<string>('');
+
   return (
     <>
       <h2>Přidat doktora do seznamu</h2>
