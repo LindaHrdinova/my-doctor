@@ -50,7 +50,9 @@ const doctorListData: doctorListDataProp[] = [
 ];
 
 export const DoctorList: React.FC = () => {
-  const doctors = useLiveQuery(() => db.doctors.orderBy('current').toArray());
+  const doctors = useLiveQuery(() =>
+    db.doctors.orderBy('[current+speciality]').toArray(),
+  );
   return (
     <>
       <h2>Seznam doktorů</h2>
