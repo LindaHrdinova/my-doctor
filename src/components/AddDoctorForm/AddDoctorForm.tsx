@@ -12,6 +12,8 @@ type AddDoctorFormProps = {
   setAddDoctorStatus: React.Dispatch<React.SetStateAction<string>>;
 };
 
+type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
+
 export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
 
@@ -31,8 +33,8 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
     address: Yup.string(),
     addressDetail: Yup.string(),
     phone: Yup.string().matches(
-      /^\+?\d{9,15}$/,
-      'Telefon musí mít 9-15 číslic a může začínat +',
+      /^\+?\d{4,15}$/,
+      'Telefon musí mít 4-15 číslic a může začínat +',
     ),
     email: Yup.string().email('Neplatný e-mail'),
     frequency: Yup.string().required('Povinné'),
@@ -40,9 +42,8 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
 
   return (
     <>
-      <Formik<DoctorDataProp>
+      <Formik<NewDoctorData>
         initialValues={{
-          id: 0,
           speciality: '',
           name: '',
           address: '',
@@ -57,8 +58,11 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
           try {
             await db.doctors.add(formData);
             setAddDoctorStatus(`Nový doktor byl přidán do diáře!`);
+            console.log(formData);
             resetForm();
           } catch (error) {
+            console.log(formData);
+            console.log(error);
             setAddDoctorStatus('Nepovedlo se přidat doktora do diáře.');
           }
         }}
@@ -69,7 +73,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
           >
             <label className="addDoctorForm__label">
               <span>
-                Specialista <span className="formRequired">*</span>:
+                Specializace <span className="formRequired">*</span>
               </span>
               <AutoComplete
                 className={
@@ -91,7 +95,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
               />
             </label>
             <label className="addDoctorForm__label">
-              Jméno:
+              Jméno
               <Field
                 name="name"
                 className={
@@ -107,7 +111,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
               />
             </label>
             <label className="addDoctorForm__label">
-              Adresa:
+              Adresa
               <Field
                 name="address"
                 className={
@@ -123,7 +127,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
               />
             </label>
             <label className="addDoctorForm__label">
-              Detail adresy:
+              Detail adresy
               <Field
                 name="addressDetail"
                 className={
@@ -139,7 +143,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
               />
             </label>
             <label className="addDoctorForm__label">
-              Telefon:
+              Telefon
               <Field
                 name="phone"
                 className={
@@ -155,7 +159,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
               />
             </label>
             <label className="addDoctorForm__label">
-              E-mail:
+              E-mail
               <Field
                 name="email"
                 type="email"
@@ -171,7 +175,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 className="addDoctorForm__errorMessage"
               />
             </label>
-            <label className="addDoctorForm__label">
+            {/*<label className="addDoctorForm__label">
               <span>
                 Pravidelnost prohlídek <span className="formRequired">*</span>:
               </span>
@@ -189,7 +193,36 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 component="p"
                 className="addDoctorForm__errorMessage"
               />
+            </label>*/}
+            <label className="addDoctorForm__label">
+              <span>
+                Pravidelnost prohlídek <span className="formRequired">*</span>
+              </span>
+              <Field
+                name="frequency"
+                as="select"
+                className={
+                  formik.touched.frequency && formik.errors.frequency
+                    ? 'addDoctorForm__input input--error'
+                    : 'addDoctorForm__input'
+                }
+                required
+              >
+                <option value="">Vyberte možnost</option>
+                <option value="4x ročně">4x ročně</option>
+                <option value="2x ročně">2x ročně</option>
+                <option value="1x ročně">1x ročně</option>
+                <option value="nepravidelná">nepravidelná</option>
+                <option value="jiné">jiné</option>
+              </Field>
+
+              <ErrorMessage
+                name="frequency"
+                component="p"
+                className="addDoctorForm__errorMessage"
+              />
             </label>
+            {formik.values.frequency === 'jiné' ? <p>jiné</p> : null}
             <div className="addDoctorForm__buttons ">
               <input
                 type="submit"
