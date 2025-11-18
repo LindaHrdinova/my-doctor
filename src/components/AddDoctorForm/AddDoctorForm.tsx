@@ -3,14 +3,17 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
-//import { db } from '../../db/db';
+import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-export const AddDoctorForm = () => {
+type AddDoctorFormProps = {
+  setAddDoctorStatus: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
-  //const current = 0;
 
   //SPECIALITY autocomplete "našeptávač"
   const searchSpeciality = (e: { query: string }) => {
@@ -35,35 +38,6 @@ export const AddDoctorForm = () => {
     frequency: Yup.string().required('Povinné'),
   });
 
-  //Add to database
-  /*const addDoctor = async () => {
-    try {
-      const id = await db.doctors.add({
-        speciality,
-        name,
-        address,
-        addressDetail,
-        phone,
-        email,
-        frequency,
-        current,
-      });
-
-      setStatus(
-        `Doctor ${name ? name : speciality} successfully added. Got id ${id}.`,
-      );
-      setSpeciality('');
-      setName('');
-      setAddress('');
-      setAddressDetail('');
-      setPhone('');
-      setEmail('');
-      setFrequency('');
-    } catch (error) {
-      setStatus(`Failed to add ${name ? name : speciality}: ${error}`);
-    }
-  };*/
-
   return (
     <>
       <Formik<DoctorDataProp>
@@ -79,7 +53,15 @@ export const AddDoctorForm = () => {
           current: 0,
         }}
         validationSchema={SignupSchema}
-        onSubmit={(formData) => console.log(formData)}
+        onSubmit={async (formData, { resetForm }) => {
+          try {
+            await db.doctors.add(formData);
+            setAddDoctorStatus(`Nový doktor byl přidán do diáře!`);
+            resetForm();
+          } catch (error) {
+            setAddDoctorStatus('Nepovedlo se přidat doktora do diáře.');
+          }
+        }}
       >
         {(formik) => (
           <Form
