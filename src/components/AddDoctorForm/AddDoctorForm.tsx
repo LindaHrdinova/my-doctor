@@ -175,25 +175,6 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 className="addDoctorForm__errorMessage"
               />
             </label>
-            {/*<label className="addDoctorForm__label">
-              <span>
-                Pravidelnost prohlídek <span className="formRequired">*</span>:
-              </span>
-              <Field
-                name="frequency"
-                className={
-                  formik.touched.frequency && formik.errors.frequency
-                    ? 'addDoctorForm__input input--error'
-                    : 'addDoctorForm__input'
-                }
-                required
-              />
-              <ErrorMessage
-                name="frequency"
-                component="p"
-                className="addDoctorForm__errorMessage"
-              />
-            </label>*/}
             <label className="addDoctorForm__label">
               <span>
                 Pravidelnost prohlídek <span className="formRequired">*</span>
@@ -209,13 +190,12 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 required
               >
                 <option value="">Vyberte možnost</option>
-                <option value="4x ročně">4x ročně</option>
-                <option value="2x ročně">2x ročně</option>
-                <option value="1x ročně">1x ročně</option>
-                <option value="nepravidelná">nepravidelná</option>
-                <option value="jiné">jiné</option>
+                <option value="perYear4">4x ročně</option>
+                <option value="perYear2">2x ročně</option>
+                <option value="perYear1">1x ročně</option>
+                <option value="irregular">nepravidelná</option>
+                <option value="other">jiné</option>
               </Field>
-
               <ErrorMessage
                 name="frequency"
                 component="p"

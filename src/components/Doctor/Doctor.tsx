@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMdArrowDropup } from 'react-icons/io';
 import { Switcher } from '../Switcher/Switcher';
+import { dbDoctorText } from '../../text/dbDoctorText';
 
 interface doctorDataProp {
   id: number;
@@ -72,7 +73,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
         ) : null}
         {frequency ? (
           <li>
-            <strong>Pravidelnost prohlídek:</strong> {frequency}
+            <strong>Pravidelnost prohlídek:</strong> {dbDoctorText(frequency)}
           </li>
         ) : null}
         <li>
