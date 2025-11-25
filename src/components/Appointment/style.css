@@ -1,4 +1,4 @@
-.card {
+.appointment {
   background-color: var(--black-color);
   color: var(--white-color);
   border-radius: 10px;
@@ -7,8 +7,12 @@
   box-shadow: var(--box-shadow);
 }
 
+.appointment__title {
+  margin: 7px;
+}
+
 @media (prefers-color-scheme: light) {
-  .card {
+  .appointment {
     background-color: var(--whiteDark-color);
     color: var(--black-color);
   }

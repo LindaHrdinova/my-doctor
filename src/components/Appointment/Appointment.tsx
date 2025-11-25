@@ -2,12 +2,26 @@ import './style.css';
 //import { useLiveQuery } from 'dexie-react-hooks';
 //import { db } from '../../db/db';
 
-export const Appointment = () => {
+interface appointmentDataProp {
+  day: string;
+  date: string;
+  time: string;
+  speciality: string;
+}
+
+export const Appointment: React.FC<appointmentDataProp> = ({
+  day,
+  date,
+  time,
+  speciality,
+}) => {
   //const appointments = useLiveQuery(() => db.appointments.toArray());
   return (
-    <div className="card">
-      <h3>Pá 16. 12. 2025 8:30</h3>
-      <span>Rentgen</span>
+    <div className="appointment">
+      <h3 className="appointment__title">
+        {day} {date} {time}
+      </h3>
+      <span>{speciality}</span>
     </div>
   );
 };

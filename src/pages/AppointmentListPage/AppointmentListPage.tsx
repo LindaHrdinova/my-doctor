@@ -7,7 +7,12 @@ export const AppointmentList = () => {
     <>
       <h2>Seznam termínů</h2>
       <p>Tady bude seznam termínů.</p>
-      <Appointment />
+      <Appointment
+        day={'St'}
+        date={'26.11.2025'}
+        time={'18:00'}
+        speciality={'Frontentologie'}
+      />
       <BigButton
         textButton={<FaPlus />}
         urlButton="new-appointment"
