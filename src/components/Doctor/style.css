@@ -44,6 +44,29 @@
   color: var(--light-color);
 }
 
+.doctor__menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.doctor__icon {
+  color: var(--main-color);
+  font-size: 34px;
+  cursor: pointer;
+}
+
+.doctor__icon:hover {
+  color: var(--mainDark-color);
+}
+
+.doctor__icon--inactive {
+  color: #bbbbbb;
+}
+
+.doctor__icon--inactive:hover {
+  color: var(--white-color);
+}
 
 @media (prefers-color-scheme: light) {
   .doctor {

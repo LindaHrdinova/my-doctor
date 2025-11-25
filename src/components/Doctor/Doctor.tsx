@@ -4,6 +4,7 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMdArrowDropup } from 'react-icons/io';
 import { Switcher } from '../Switcher/Switcher';
 import { dbDoctorText } from '../../text/dbDoctorText';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 interface doctorDataProp {
   id: number;
@@ -77,7 +78,23 @@ export const Doctor: React.FC<doctorDataProp> = ({
           </li>
         ) : null}
         <li>
-          <Switcher current={current} id={id} />
+          <span className="doctor__menu">
+            <Switcher current={current} id={id} />{' '}
+            <MdEdit
+              className={
+                current === 0
+                  ? 'doctor__icon'
+                  : 'doctor__icon doctor__icon--inactive'
+              }
+            />
+            <MdDelete
+              className={
+                current === 0
+                  ? 'doctor__icon'
+                  : 'doctor__icon doctor__icon--inactive'
+              }
+            />
+          </span>
         </li>
       </ul>
     </div>
