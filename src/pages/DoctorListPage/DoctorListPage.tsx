@@ -5,18 +5,7 @@ import { FaPlus } from 'react-icons/fa';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../db/db';
 
-interface doctorListDataProp {
-  speciality: string;
-  name: string;
-  address: string;
-  addressDetail: string;
-  phone: string;
-  email: string;
-  frequency: string;
-  current: 0 | 1;
-}
-
-const doctorListData: doctorListDataProp[] = [
+/* const doctorListData: doctorListDataProp[] = [
   {
     speciality: 'Stomatologie',
     name: 'MuDr. Petr Korunka',
@@ -47,45 +36,37 @@ const doctorListData: doctorListDataProp[] = [
     frequency: '4x ročně',
     current: 1,
   },
-];
+];*/
 
 export const DoctorList: React.FC = () => {
   const doctors = useLiveQuery(() =>
     db.doctors.orderBy('[current+speciality]').toArray(),
   );
+
   return (
     <>
       <h2>Seznam doktorů</h2>
       {/* data from db */}
-      {doctors?.map((doctor) => (
-        <Doctor
-          key={doctor.id}
-          id={doctor.id}
-          speciality={doctor.speciality}
-          name={doctor.name}
-          address={doctor.address}
-          addressDetail={doctor.addressDetail}
-          phone={doctor.phone}
-          email={doctor.email}
-          frequency={doctor.frequency}
-          current={doctor.current}
-        />
-      ))}
-      {doctorListData.map((doctor, index) => (
-        <Doctor
-          key={index}
-          id={index}
-          speciality={doctor.speciality}
-          name={doctor.name}
-          address={doctor.address}
-          addressDetail={doctor.addressDetail}
-          phone={doctor.phone}
-          email={doctor.email}
-          frequency={doctor.frequency}
-          current={doctor.current}
-        />
-      ))}
+      {doctors &&
+        doctors.length > 0 &&
+        doctors?.map((doctor) => (
+          <Doctor
+            key={doctor.id}
+            id={doctor.id}
+            speciality={doctor.speciality}
+            name={doctor.name}
+            address={doctor.address}
+            addressDetail={doctor.addressDetail}
+            phone={doctor.phone}
+            email={doctor.email}
+            frequency={doctor.frequency}
+            current={doctor.current}
+          />
+        ))}
 
+      {doctors && doctors.length === 0 && (
+        <p>Zatím nemáte žádného doktora ve svém adresáři.</p>
+      )}
       <BigButton
         urlButton="../new-doctor"
         textButton={<FaPlus />}
