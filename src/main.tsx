@@ -8,6 +8,7 @@ import { DoctorList } from './pages/DoctorListPage/DoctorListPage.tsx';
 import { HomePage } from './pages/HomePage/HomePage.tsx';
 import { AppointmentList } from './pages/AppointmentListPage/AppointmentListPage.tsx';
 import { AddAppointmentPage } from './pages/AddAppointmentPage/AddAppointmentPage.tsx';
+import { EditDoctorPage } from './pages/EditDoctorPage/EditDoctorPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/doctors',
         element: <DoctorList />,
+      },
+      {
+        path: '/doctors/:idDoctor',
+        element: <EditDoctorPage />,
       },
       {
         path: '/new-doctor',

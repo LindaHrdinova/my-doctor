@@ -1,9 +1,10 @@
 import './style.css';
 import { useState } from 'react';
-import { IoMdArrowDropdown } from 'react-icons/io';
-import { IoMdArrowDropup } from 'react-icons/io';
 import { Switcher } from '../Switcher/Switcher';
 import { dbDoctorText } from '../../text/dbDoctorText';
+import { Link } from 'react-router';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
 
 interface doctorDataProp {
@@ -30,6 +31,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
   current,
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
+
   return (
     <div className={current === 0 ? 'doctor' : 'doctor doctor--inactive'}>
       <h3
@@ -80,13 +82,15 @@ export const Doctor: React.FC<doctorDataProp> = ({
         <li>
           <span className="doctor__menu">
             <Switcher current={current} id={id} />{' '}
-            <MdEdit
-              className={
-                current === 0
-                  ? 'doctor__icon'
-                  : 'doctor__icon doctor__icon--inactive'
-              }
-            />
+            <Link to={`/doctors/${id}`}>
+              <MdEdit
+                className={
+                  current === 0
+                    ? 'doctor__icon'
+                    : 'doctor__icon doctor__icon--inactive'
+                }
+              />
+            </Link>
             <MdDelete
               className={
                 current === 0
