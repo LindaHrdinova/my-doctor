@@ -27,10 +27,10 @@ export const AppointmentList = () => {
       })}
       <BigButton
         textButton={<FaPlus />}
-        urlButton="new-appointment"
+        urlButton="/new-appointment"
         primaryButton={true}
       />
-      <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
+      <BigButton urlButton="/" textButton="Domů" primaryButton={false} />
     </>
   );
 };

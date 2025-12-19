@@ -67,11 +67,11 @@ export const DoctorList: React.FC = () => {
         <p>Zatím nemáte žádného doktora ve svém adresáři.</p>
       )}
       <BigButton
-        urlButton="../new-doctor"
+        urlButton="/new-doctor"
         textButton={<FaPlus />}
         primaryButton={true}
       />
-      <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
+      <BigButton urlButton="/" textButton="Domů" primaryButton={false} />
     </>
   );
 };

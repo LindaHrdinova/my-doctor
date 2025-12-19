@@ -14,7 +14,7 @@ export const BigButton: React.FC<bigButtonProp> = ({
   primaryButton,
 }) => {
   return (
-    <Link to={`../${urlButton}`}>
+    <Link to={urlButton}>
       <button
         className={`bigButton ${
           primaryButton ? ' bigButton--primary' : null

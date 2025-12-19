@@ -227,8 +227,8 @@ export const EditDoctorPage = () => {
                   className="onClick__style button button--primary"
                   value="Uložit změny"
                 />
-                <Link to="/" className="onClick__style button">
-                  Domů
+                <Link to="/doctors" className="onClick__style button">
+                  Zpátky na seznam doktorů
                 </Link>
               </div>
             </Form>

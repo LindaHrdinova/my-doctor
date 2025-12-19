@@ -7,7 +7,7 @@ export const AddAppointmentPage = () => {
       <h2>Přidat termín</h2>
       <p>Tady bude formulář pro přidání návštěvy.</p>
       <AddAppointmentForm />
-      <BigButton urlButton="../" textButton="Domů" primaryButton={false} />
+      <BigButton urlButton="/" textButton="Domů" primaryButton={false} />
     </>
   );
 };

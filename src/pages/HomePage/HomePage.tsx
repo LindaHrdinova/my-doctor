@@ -8,22 +8,22 @@ export const HomePage = () => {
       <NextAppointment />
       <BigButton
         textButton="Seznam termínů"
-        urlButton="appointments"
+        urlButton="/appointments"
         primaryButton={true}
       />
       <BigButton
         textButton="Přidat termín"
-        urlButton="new-appointment"
+        urlButton="/new-appointment"
         primaryButton={true}
       />
       <BigButton
         textButton="Seznam doktorů"
-        urlButton="doctors"
+        urlButton="/doctors"
         primaryButton={true}
       />
       <BigButton
         textButton="Přidat doktora"
-        urlButton="new-doctor"
+        urlButton="/new-doctor"
         primaryButton={true}
       />
     </main>
