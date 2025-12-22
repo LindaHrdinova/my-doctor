@@ -1,11 +1,11 @@
 import './style.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
 import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 type AddDoctorFormProps = {
@@ -40,6 +40,22 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
     frequency: Yup.string().required('Povinné'),
   });
 
+  const handleSubmitFormik = async (
+    formData: NewDoctorData,
+    { resetForm }: FormikHelpers<NewDoctorData>,
+  ) => {
+    try {
+      await db.doctors.add(formData);
+      setAddDoctorStatus(`Nový doktor byl přidán do adresáře!`);
+      console.log(formData);
+      resetForm();
+    } catch (error) {
+      console.log(formData);
+      console.log(error);
+      setAddDoctorStatus('Nepovedlo se přidat doktora do adresáře.');
+    }
+  };
+
   return (
     <>
       <Formik<NewDoctorData>
@@ -54,6 +70,8 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
           current: 0,
         }}
         validationSchema={SignupSchema}
+        onSubmit={handleSubmitFormik}
+        /*
         onSubmit={async (formData, { resetForm }) => {
           try {
             await db.doctors.add(formData);
@@ -65,12 +83,10 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
             console.log(error);
             setAddDoctorStatus('Nepovedlo se přidat doktora do diáře.');
           }
-        }}
+        }}*/
       >
         {(formik) => (
-          <Form
-            className="addDoctorForm" /* doplnit onSubmit - vyřeší se problém s validací? Vyzkoušet */
-          >
+          <Form className="addDoctorForm">
             <label className="addDoctorForm__label">
               <span>
                 Specializace <span className="formRequired">*</span>
