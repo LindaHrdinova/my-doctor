@@ -1,5 +1,5 @@
 import './style.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
