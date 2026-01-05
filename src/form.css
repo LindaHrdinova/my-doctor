@@ -1,0 +1,131 @@
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.addForm__label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+
+.addForm__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.addForm__column>label {
+  text-align: left;
+}
+
+.addForm__input {
+  border: solid 2px var(--gray-color);
+  background-color: var(--white-color);
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  padding: 7px;
+}
+
+
+.addForm__autoComplete>input {
+  width: 100%;
+  border: solid 2px var(--white-color);
+  background-color: var(--white-color);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 7px;
+}
+
+.addForm__buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 10px;
+}
+
+.addForm__input,
+input.p-inputtext {
+  background-color: var(--blackLight-color);
+  border-color: var(--blackLight-color);
+  box-shadow: var(--box-shadow);
+  border-radius: 7px;
+}
+
+.p-autocomplete-item {
+  padding: 5px;
+}
+
+.p-autocomplete-item:hover {
+  color: var(--lightGreen-color);
+}
+
+.p-autocomplete-panel {
+  padding: 0 7px;
+}
+
+.p-autocomplete-items {
+  border-top: 0;
+  border-radius: 0 0 5px 5px;
+  background-color: var(--gray-color);
+  box-shadow: var(--box-shadow);
+}
+
+/* ERROR MESSAGE */
+
+.addForm__errorMessage {
+  color: #d9534f;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  margin-bottom: 5px;
+}
+
+input.input--error,
+.input--error>input.p-inputtext {
+  border: 2px solid #d9534f;
+  background-color: #412d2d;
+  border-radius: 7px;
+}
+
+.formRequired {
+  color: #d9534f;
+  /* same ass error */
+  font-weight: 900;
+  margin-left: 2px;
+}
+
+
+
+@media (prefers-color-scheme: light) {
+
+  .addForm__input,
+  input.p-inputtext {
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+  }
+
+  .p-autocomplete-items {
+    background-color: var(--whiteDark-color);
+  }
+
+  .p-autocomplete-item:hover {
+    color: var(--main-color);
+  }
+
+  /* ERROR MESSAGE */
+
+  .addForm__errorMessage {
+    color: #db0a03;
+  }
+
+  input.input--error,
+  .input--error>input.p-inputtext {
+    border-color: #db0a03;
+    background-color: #fdebea;
+  }
+
+  .formRequired {
+    color: #db0a03;
+  }
+}

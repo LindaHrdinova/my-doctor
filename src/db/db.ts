@@ -1,5 +1,4 @@
 import Dexie, { type EntityTable } from 'dexie';
-/* import type { AppointmentList } from '../pages/AppointmentListPage/AppointmentListPage'; */
 
 interface DoctorDataProp {
   id: number;
@@ -19,6 +18,7 @@ interface AppointmentDataProp {
   time: string;
   speciality: string;
   address: string;
+  addressDetail: string;
 }
 
 const db = new Dexie('myDoctor') as Dexie & {
@@ -28,8 +28,8 @@ const db = new Dexie('myDoctor') as Dexie & {
 db.version(1).stores({
   doctors:
     'id++, speciality, name, address, addressDetail, phone, email, frequency, current, [current+speciality]',
-  appointments: 'id++, date, time, speciality, address',
+  appointments: 'id++, date, time, speciality, address, addressDetail',
 });
 
-export type { DoctorDataProp };
+export type { DoctorDataProp, AppointmentDataProp };
 export { db };
