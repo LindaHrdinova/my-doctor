@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
+import { doctorFrequencyList } from '../../data/doctorFrequency';
 import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
@@ -71,19 +72,6 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
         }}
         validationSchema={SignupSchema}
         onSubmit={handleSubmitFormik}
-        /*
-        onSubmit={async (formData, { resetForm }) => {
-          try {
-            await db.doctors.add(formData);
-            setAddDoctorStatus(`Nový doktor byl přidán do diáře!`);
-            console.log(formData);
-            resetForm();
-          } catch (error) {
-            console.log(formData);
-            console.log(error);
-            setAddDoctorStatus('Nepovedlo se přidat doktora do diáře.');
-          }
-        }}*/
       >
         {(formik) => (
           <Form className="addDoctorForm">
@@ -205,12 +193,11 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 }
                 required
               >
-                <option value="">Vyberte možnost</option>
-                <option value="perYear4">4x ročně</option>
-                <option value="perYear2">2x ročně</option>
-                <option value="perYear1">1x ročně</option>
-                <option value="irregular">nepravidelná</option>
-                <option value="other">jiné</option>
+                {doctorFrequencyList.map((doctorFrequency) => (
+                  <option value={doctorFrequency.value}>
+                    {doctorFrequency.textCs}
+                  </option>
+                ))}
               </Field>
               <ErrorMessage
                 name="frequency"
