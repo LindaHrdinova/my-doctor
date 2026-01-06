@@ -1,30 +1,29 @@
 import { FaPlus } from 'react-icons/fa';
 import { BigButton } from '../../components/BigButton/BigButton';
 import { Appointment } from '../../components/Appointment/Appointment';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { db } from '../../db/db';
 
-const appointmentList = [
-  { day: 'St', date: '26.11.2025', time: '18:00', doctor: 'Frontentologie' },
-  { day: 'Pá', date: '5.12.2025', time: '16:30', doctor: 'Rentgen' },
-  { day: 'Po', date: '26.1.2026', time: '9:00', doctor: 'Endokrinologie' },
-  { day: 'Čt', date: '22.1.2026', time: '7:45', doctor: 'Praktický lékař' },
-];
-
-export const AppointmentList = () => {
+export const AppointmentList: React.FC = () => {
+  const appointments = useLiveQuery(() =>
+    db.appointments.orderBy('date').toArray(),
+  );
   return (
     <>
       <h2>Seznam termínů</h2>
-      <p>Tady bude seznam termínů.</p>
-      {appointmentList.map((app, id) => {
-        return (
+      {appointments &&
+        appointments.length > 0 &&
+        appointments?.map((appointment) => (
           <Appointment
-            key={id}
-            day={app.day}
-            date={app.date}
-            time={app.time}
-            speciality={app.doctor}
+            key={appointment.id}
+            date={appointment.date}
+            time={appointment.time}
+            speciality={appointment.speciality}
           />
-        );
-      })}
+        ))}
+      {appointments && appointments.length === 0 && (
+        <p>Nemáte naplánovaný žádný termín.</p>
+      )}
       <BigButton
         textButton={<FaPlus />}
         urlButton="/new-appointment"

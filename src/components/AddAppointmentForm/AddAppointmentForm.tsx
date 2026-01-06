@@ -32,7 +32,7 @@ export const AddAppointmentForm = ({
   const SignupSchema = Yup.object().shape({
     date: Yup.date().required('Povinné'),
     time: Yup.string()
-      .matches(/^\d?\d{1}:\d{2}$/, 'Neplatný formát času')
+      .matches(/^([01]\d|2[0-3]):[0-5]\d$/, 'Neplatný formát času')
       .required('Povinné'),
     speciality: Yup.string().required('Povinné'),
     address: Yup.string(),
