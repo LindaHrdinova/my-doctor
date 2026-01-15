@@ -7,6 +7,7 @@ import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { BigButton } from '../BigButton/BigButton';
 
 type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -29,9 +30,7 @@ export const AddAppointmentForm = ({
     const suggestion = myDocSpecList.filter((doc) =>
       doc.toLowerCase().startsWith(query),
     );
-    console.log(suggestion);
     setMyDoctorListSpec(suggestion);
-    console.log(myDoctorListSpec, myDoctorListSpec.length);
   };
 
   //YUP validation
@@ -60,8 +59,6 @@ export const AddAppointmentForm = ({
       setAddAppointmentStatus('Nepovedlo se přidat termín do diáře.');
     }
   };
-
-  console.log(myDocSpecList);
 
   return (
     <>
@@ -137,24 +134,45 @@ export const AddAppointmentForm = ({
                 className="addDoctorForm__errorMessage"
               />
             </label>
-            <label className="addForm__label">Vyber doktora</label>
 
-            <select>
-              <option></option>
-              {myDoctorList
-                ?.filter(
-                  (doc) =>
-                    doc.speciality
-                      .toLowerCase()
-                      .startsWith(formik.values.speciality.toLowerCase()) &&
-                    formik.values.speciality.length > 2,
-                )
-                .map((doc) => (
-                  <option key={doc.id} value={doc.id}>
-                    {doc.speciality} {doc.name && ' - ' + doc.name}
-                  </option>
-                ))}
-            </select>
+            {formik.values.speciality.length > 2 &&
+            myDoctorList &&
+            myDoctorList?.filter((doc) =>
+              doc.speciality
+                .toLowerCase()
+                .startsWith(formik.values.speciality.toLowerCase()),
+            ).length >= 1 ? (
+              <>
+                <label className="addForm__label">Vyber doktora</label>
+                <select>
+                  {myDoctorList
+                    ?.filter(
+                      (doc) =>
+                        doc.speciality
+                          .toLowerCase()
+                          .startsWith(formik.values.speciality.toLowerCase()) &&
+                        formik.values.speciality.length > 2,
+                    )
+                    .map((doc) => (
+                      <option key={doc.id} value={doc.id}>
+                        {doc.speciality} {doc.name && ' - ' + doc.name}
+                      </option>
+                    ))}
+                </select>
+              </>
+            ) : null}
+
+            {formik.values.speciality.length > 2 &&
+            myDoctorList &&
+            myDoctorList?.filter((doc) =>
+              doc.speciality
+                .toLowerCase()
+                .startsWith(formik.values.speciality.toLowerCase()),
+            ).length < 1 ? (
+              <Link to="/new-doctor" className="onClick__style button">
+                Žádný doktor nenalezen. Chcete přidat nového doktora?
+              </Link>
+            ) : null}
 
             <div className="addForm__buttons ">
               <input
