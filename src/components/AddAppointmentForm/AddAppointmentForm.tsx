@@ -7,7 +7,6 @@ import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { BigButton } from '../BigButton/BigButton';
 
 type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
