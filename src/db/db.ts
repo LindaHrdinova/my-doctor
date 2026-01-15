@@ -17,8 +17,6 @@ interface AppointmentDataProp {
   date: Date /* pouzit knihovnu Temporal */;
   time: string;
   speciality: string;
-  address: string;
-  addressDetail: string;
 }
 
 const db = new Dexie('myDoctor') as Dexie & {
@@ -28,7 +26,7 @@ const db = new Dexie('myDoctor') as Dexie & {
 db.version(1).stores({
   doctors:
     'id++, speciality, name, address, addressDetail, phone, email, frequency, current, [current+speciality]',
-  appointments: 'id++, date, time, speciality, address, addressDetail',
+  appointments: 'id++, date, time, speciality',
 });
 
 export type { DoctorDataProp, AppointmentDataProp };

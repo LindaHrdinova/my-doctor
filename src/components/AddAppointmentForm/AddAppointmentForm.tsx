@@ -2,11 +2,11 @@ import '../../form.css';
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
-import { specialityList } from '../../data/specialityList';
 import { db } from '../../db/db';
 import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import { useLiveQuery } from 'dexie-react-hooks';
 
 type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -17,15 +17,21 @@ export const AddAppointmentForm = ({
 }: AddAppointmentFormProps) => {
   type NewAppointmentData = Omit<AppointmentDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
-  const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
+  //const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
+  const myDoctorList = useLiveQuery(() => db.doctors.toArray());
+  const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
+
+  const [myDoctorListSpec, setMyDoctorListSpec] = useState<string[]>([]);
 
   //SPECIALITY autocomplete "našeptávač"
   const searchSpeciality = (e: { query: string }) => {
     const query = e.query.toLocaleLowerCase();
-    const suggestion = specialityList.filter((specialist) =>
-      specialist.toLowerCase().startsWith(query),
+    const suggestion = myDocSpecList.filter((doc) =>
+      doc.toLowerCase().startsWith(query),
     );
-    setSuggestDocSpec(suggestion);
+    console.log(suggestion);
+    setMyDoctorListSpec(suggestion);
+    console.log(myDoctorListSpec, myDoctorListSpec.length);
   };
 
   //YUP validation
@@ -55,6 +61,8 @@ export const AddAppointmentForm = ({
     }
   };
 
+  console.log(myDocSpecList);
+
   return (
     <>
       <Formik<NewAppointmentData>
@@ -62,8 +70,6 @@ export const AddAppointmentForm = ({
           date: new Date(),
           time: '',
           speciality: '',
-          address: '',
-          addressDetail: '',
         }}
         validationSchema={SignupSchema}
         onSubmit={handleSubmitFormik}
@@ -76,6 +82,7 @@ export const AddAppointmentForm = ({
               </span>
               <Field
                 name="date"
+                type="date"
                 className={
                   formik.touched.date && formik.errors.date
                     ? 'addForm__input input--error'
@@ -94,6 +101,7 @@ export const AddAppointmentForm = ({
               </span>
               <Field
                 name="time"
+                type="time"
                 className={
                   formik.touched.date && formik.errors.date
                     ? 'addForm__input input--error'
@@ -117,7 +125,7 @@ export const AddAppointmentForm = ({
                     : 'addDoctor__autoComplete'
                 }
                 value={formik.values.speciality}
-                suggestions={suggestDocSpec}
+                suggestions={myDoctorListSpec}
                 completeMethod={searchSpeciality}
                 onChange={(e) => formik.setFieldValue('speciality', e.value)}
                 onBlur={() => formik.setFieldTouched('speciality', true)}
@@ -128,39 +136,26 @@ export const AddAppointmentForm = ({
                 component="p"
                 className="addDoctorForm__errorMessage"
               />
-            </label>{' '}
-            <label className="addForm__label">
-              <span>Adresa</span>
-              <Field
-                name="address"
-                className={
-                  formik.touched.address && formik.errors.address
-                    ? 'addForm__input input--error'
-                    : 'addForm__input'
-                }
-              />
-              <ErrorMessage
-                name="address"
-                component="p"
-                className="addForm__errorMessage"
-              />
-            </label>{' '}
-            <label className="addForm__label">
-              <span>Poznámka k adrese</span>
-              <Field
-                name="addressDetail"
-                className={
-                  formik.touched.addressDetail && formik.errors.addressDetail
-                    ? 'addForm__input input--error'
-                    : 'addForm__input'
-                }
-              />
-              <ErrorMessage
-                name="addressDetail"
-                component="p"
-                className="addForm__errorMessage"
-              />
             </label>
+            <label className="addForm__label">Vyber doktora</label>
+
+            <select>
+              <option></option>
+              {myDoctorList
+                ?.filter(
+                  (doc) =>
+                    doc.speciality
+                      .toLowerCase()
+                      .startsWith(formik.values.speciality.toLowerCase()) &&
+                    formik.values.speciality.length > 2,
+                )
+                .map((doc) => (
+                  <option key={doc.id} value={doc.id}>
+                    {doc.speciality} {doc.name && ' - ' + doc.name}
+                  </option>
+                ))}
+            </select>
+
             <div className="addForm__buttons ">
               <input
                 type="submit"
