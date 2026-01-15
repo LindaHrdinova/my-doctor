@@ -62,6 +62,17 @@ input[type="submit"] {
   box-shadow: var(--box-shadow);
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px
+}
+
+.title__logo {
+  height: 3rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--black-color);

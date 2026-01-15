@@ -4,7 +4,10 @@ import { Outlet } from 'react-router';
 const App = () => {
   return (
     <>
-      <h1>Můj doctor</h1>
+      <span className="title">
+        <img src="public/favicon.svg" className="title__logo" />
+        <h1>Můj doctor</h1>
+      </span>
       <Outlet />
     </>
   );
