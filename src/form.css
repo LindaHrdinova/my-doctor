@@ -90,7 +90,7 @@ input.input--error,
 
 .formRequired {
   color: #d9534f;
-  /* same ass error */
+  /* same as error */
   font-weight: 900;
   margin-left: 2px;
 }

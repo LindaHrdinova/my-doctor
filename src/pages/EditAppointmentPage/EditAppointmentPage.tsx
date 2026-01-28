@@ -36,9 +36,10 @@ export const EditAppointmentPage: React.FC = () => {
   //YUP validation
   const SignupSchema = Yup.object().shape({
     date: Yup.date().required('Povinné'),
-    time: Yup.string()
-      .matches(/^(\d|[01]\d|2[0-3]):[0-5]\d$/, 'Neplatný formát času')
-      .required('Povinné'),
+    time: Yup.string().matches(
+      /^(\d|[01]\d|2[0-3]):[0-5]\d$/,
+      'Neplatný formát času',
+    ),
     speciality: Yup.string().required('Povinné'),
     doctorId: Yup.number(),
   });
@@ -90,9 +91,7 @@ export const EditAppointmentPage: React.FC = () => {
                 />
               </label>
               <label className="addForm__label">
-                <span>
-                  Čas <span className="formRequired">*</span>
-                </span>
+                <span>Čas</span>
                 <Field
                   name="time"
                   type="time"

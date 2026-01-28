@@ -18,6 +18,7 @@ export const EditDoctorPage = () => {
   );
   const doctorData = doctors?.find((doc) => doc.id === Number(idDoctor));
   let doctorDataNew;
+  console.log(doctorDataNew);
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
   const [editDoctorStatus, setEditDoctorStatus] = useState<string>('');
 

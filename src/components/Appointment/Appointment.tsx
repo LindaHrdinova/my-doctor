@@ -20,7 +20,6 @@ export const Appointment: React.FC<appointmentDataProp> = ({
   //const appointments = useLiveQuery(() => db.appointments.toArray());
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
 
-  console.log(date);
   return (
     <div className="appointment">
       <div onClick={() => setDetailHidden(!detailHidden)}>

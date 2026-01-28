@@ -35,9 +35,10 @@ export const AddAppointmentForm = ({
   //YUP validation
   const SignupSchema = Yup.object().shape({
     date: Yup.date().required('Povinné'),
-    time: Yup.string()
-      .matches(/^(\d|[01]\d|2[0-3]):[0-5]\d$/, 'Neplatný formát času')
-      .required('Povinné'),
+    time: Yup.string().matches(
+      /^(\d|[01]\d|2[0-3]):[0-5]\d$/,
+      'Neplatný formát času',
+    ),
     speciality: Yup.string().required('Povinné'),
   });
 
@@ -48,10 +49,9 @@ export const AddAppointmentForm = ({
     try {
       await db.appointments.add(formData);
       setAddAppointmentStatus(`Nový termín byl přidán do diáře!`);
-      console.log(formData);
+
       resetForm();
     } catch (error) {
-      console.log(formData);
       console.log(error);
       setAddAppointmentStatus('Nepovedlo se přidat termín do diáře.');
     }
@@ -91,9 +91,7 @@ export const AddAppointmentForm = ({
               />
             </label>
             <label className="addForm__label">
-              <span>
-                Čas <span className="formRequired">*</span>
-              </span>
+              <span>Čas</span>
               <Field
                 name="time"
                 type="time"
