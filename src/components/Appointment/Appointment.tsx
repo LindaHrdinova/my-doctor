@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { db } from '../../db/db';
 
 interface appointmentDataProp {
   id: number;
@@ -42,7 +43,10 @@ export const Appointment: React.FC<appointmentDataProp> = ({
               <Link to={`/appointments/${id}`}>
                 <MdEdit className="doctor__icon" />
               </Link>
-              <MdDelete className="doctor__icon" />
+              <MdDelete
+                className="doctor__icon"
+                onClick={async () => await db.appointments.delete(id)}
+              />
             </span>
           </li>
         </ul>

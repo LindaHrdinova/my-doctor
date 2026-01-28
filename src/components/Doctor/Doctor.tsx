@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { db } from '../../db/db';
 
 interface doctorDataProp {
   id: number;
@@ -99,6 +100,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
                   ? 'doctor__icon'
                   : 'doctor__icon doctor__icon--inactive'
               }
+              onClick={async () => await db.doctors.delete(id)}
             />
           </span>
         </li>
