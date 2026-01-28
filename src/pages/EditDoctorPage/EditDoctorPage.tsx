@@ -18,16 +18,11 @@ export const EditDoctorPage = () => {
   );
   const doctorData = doctors?.find((doc) => doc.id === Number(idDoctor));
   let doctorDataNew;
-  console.log('doctor data: ');
-  console.log(doctorData);
-  console.log(doctorData?.speciality);
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
   const [editDoctorStatus, setEditDoctorStatus] = useState<string>('');
 
   useEffect(() => {
     doctorDataNew = doctorData;
-    console.log('new');
-    console.log(doctorDataNew);
   }, [doctorData]);
 
   //SPECIALITY autocomplete "našeptávač"
@@ -77,18 +72,14 @@ export const EditDoctorPage = () => {
             try {
               await db.doctors.update(Number(idDoctor), formData);
               setEditDoctorStatus(`Údaje byly úspěšně uloženy!`);
-              console.log(formData);
             } catch (error) {
               setEditDoctorStatus(`Došlo k chybě a údaje se neuložily.`);
-              console.log(formData);
               console.log(error);
             }
           }}
         >
           {(formik) => (
-            <Form
-              className="addDoctorForm" /* doplnit onSubmit - vyřeší se problém s validací? Vyzkoušet */
-            >
+            <Form className="addDoctorForm">
               <label className="addDoctorForm__label">
                 <span>
                   Specializace <span className="formRequired">*</span>

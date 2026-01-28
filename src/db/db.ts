@@ -14,7 +14,7 @@ interface DoctorDataProp {
 
 interface AppointmentDataProp {
   id: number;
-  date: Date /* pouzit knihovnu Temporal */;
+  date: Date /* use library Temporal */;
   time: string;
   speciality: string;
   doctorId: number;

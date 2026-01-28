@@ -9,7 +9,8 @@ import { AutoComplete } from 'primereact/autocomplete';
 
 export const EditAppointmentPage: React.FC = () => {
   const { idAppointment } = useParams();
-  const [editAppointmentStatus, setEditAppointmentStatus] = useState('');
+  const [editAppointmentStatus, setEditAppointmentStatus] =
+    useState<string>('');
 
   type NewAppointmentData = Omit<AppointmentDataProp, 'id'>;
 
@@ -18,7 +19,6 @@ export const EditAppointmentPage: React.FC = () => {
     (appointment) => appointment.id === Number(idAppointment),
   );
 
-  console.log(appointentData);
   const myDoctorList = useLiveQuery(() => db.doctors.toArray());
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
 
@@ -62,10 +62,8 @@ export const EditAppointmentPage: React.FC = () => {
             try {
               await db.appointments.update(Number(idAppointment), formData);
               setEditAppointmentStatus(`Údaje byly úspěšně uloženy!`);
-              console.log(formData);
             } catch (error) {
               setEditAppointmentStatus(`Došlo k chybě a údaje se neuložily.`);
-              console.log(formData);
               console.log(error);
             }
           }}

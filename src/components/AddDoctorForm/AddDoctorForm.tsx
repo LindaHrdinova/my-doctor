@@ -48,10 +48,8 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
     try {
       await db.doctors.add(formData);
       setAddDoctorStatus(`Nový doktor byl přidán do adresáře!`);
-      console.log(formData);
       resetForm();
     } catch (error) {
-      console.log(formData);
       console.log(error);
       setAddDoctorStatus('Nepovedlo se přidat doktora do adresáře.');
     }
