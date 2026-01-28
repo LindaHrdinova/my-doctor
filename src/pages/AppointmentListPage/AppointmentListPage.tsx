@@ -20,6 +20,7 @@ export const AppointmentList: React.FC = () => {
             date={appointment.date}
             time={appointment.time}
             speciality={appointment.speciality}
+            doctorId={appointment.doctorId}
           />
         ))}
       {appointments && appointments.length === 0 && (

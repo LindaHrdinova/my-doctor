@@ -23,6 +23,7 @@ export const NextAppointment: React.FC = () => {
           date={appointment.date}
           time={appointment.time}
           speciality={appointment.speciality}
+          doctorId={appointment.doctorId}
         />
       ))}
     </>

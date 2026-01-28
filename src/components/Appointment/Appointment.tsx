@@ -4,12 +4,14 @@ import { Link } from 'react-router';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { db } from '../../db/db';
+import { useLiveQuery } from 'dexie-react-hooks';
 
 interface appointmentDataProp {
   id: number;
   date: Date;
   time: string;
   speciality: string;
+  doctorId: number;
 }
 
 export const Appointment: React.FC<appointmentDataProp> = ({
@@ -17,9 +19,16 @@ export const Appointment: React.FC<appointmentDataProp> = ({
   date,
   time,
   speciality,
+  doctorId,
 }) => {
   //const appointments = useLiveQuery(() => db.appointments.toArray());
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
+
+  //doctor data
+  const doctors = useLiveQuery(() => db.doctors.toArray());
+  const doctorData = doctors?.find((doctor) => doctor.id === doctorId);
+
+  console.log(doctorData);
 
   return (
     <div className="appointment">

@@ -14,7 +14,6 @@ export const Switcher: React.FC<switchProp> = ({ id, current }) => {
         checked={current === 0 ? true : false}
         onChange={async (e) => {
           await db.doctors.update(id, { current: e.target.checked ? 0 : 1 });
-          console.log(e.target.checked);
         }}
       />
       <span className="slider"></span>
