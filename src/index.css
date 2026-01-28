@@ -73,6 +73,27 @@ input[type="submit"] {
   height: 3rem;
 }
 
+.onClick__style {
+  cursor: pointer;
+}
+
+.animation__data {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  overflow: hidden;
+  max-height: 500px;
+  transition:
+    max-height 0.7s ease-in-out
+}
+
+.animation__data--hidden {
+  max-height: 0;
+  transition:
+    max-height 0.7s ease-in-out
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: var(--black-color);
@@ -92,8 +113,4 @@ input[type="submit"] {
     background-color: var(--main-color);
     color: var(--white-color)
   }
-}
-
-.onClick__style {
-  cursor: pointer;
 }

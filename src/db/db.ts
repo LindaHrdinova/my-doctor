@@ -17,7 +17,7 @@ interface AppointmentDataProp {
   date: Date /* pouzit knihovnu Temporal */;
   time: string;
   speciality: string;
-  //doctorId: number;
+  doctorId: number;
 }
 
 const db = new Dexie('myDoctor') as Dexie & {

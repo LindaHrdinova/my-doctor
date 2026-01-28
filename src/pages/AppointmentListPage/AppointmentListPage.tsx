@@ -15,6 +15,7 @@ export const AppointmentList: React.FC = () => {
         appointments.length > 0 &&
         appointments?.map((appointment) => (
           <Appointment
+            id={appointment.id}
             key={appointment.id}
             date={appointment.date}
             time={appointment.time}

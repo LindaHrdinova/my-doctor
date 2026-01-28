@@ -46,7 +46,9 @@ export const Doctor: React.FC<doctorDataProp> = ({
 
       <ul
         className={
-          detailHidden ? 'doctor__data doctor__data--hidden' : 'doctor__data '
+          detailHidden
+            ? 'animation__data animation__data--hidden'
+            : 'animation__data '
         }
       >
         {name ? (

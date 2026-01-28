@@ -18,6 +18,7 @@ export const NextAppointment: React.FC = () => {
     <>
       {appointments?.map((appointment) => (
         <Appointment
+          id={appointment.id}
           key={appointment.id}
           date={appointment.date}
           time={appointment.time}

@@ -39,8 +39,6 @@ export const AddAppointmentForm = ({
       .matches(/^(\d|[01]\d|2[0-3]):[0-5]\d$/, 'Neplatný formát času')
       .required('Povinné'),
     speciality: Yup.string().required('Povinné'),
-    address: Yup.string(),
-    addressDetail: Yup.string(),
   });
 
   const handleSubmitFormik = async (
@@ -66,6 +64,7 @@ export const AddAppointmentForm = ({
           date: new Date(),
           time: '',
           speciality: '',
+          doctorId: 0,
         }}
         validationSchema={SignupSchema}
         onSubmit={handleSubmitFormik}
