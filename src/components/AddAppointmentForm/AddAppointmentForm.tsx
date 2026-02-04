@@ -139,22 +139,32 @@ export const AddAppointmentForm = ({
                 .startsWith(formik.values.speciality.toLowerCase()),
             ).length >= 1 ? (
               <>
-                <label className="addForm__label">Vyber doktora</label>
-                <select>
-                  {myDoctorList
-                    ?.filter(
-                      (doc) =>
-                        doc.speciality
-                          .toLowerCase()
-                          .startsWith(formik.values.speciality.toLowerCase()) &&
-                        formik.values.speciality.length > 2,
-                    )
-                    .map((doc) => (
-                      <option key={doc.id} value={doc.id}>
-                        {doc.speciality} {doc.name && ' - ' + doc.name}
-                      </option>
-                    ))}
-                </select>
+                <label className="addForm__label">
+                  Vyber doktora
+                  <select
+                    name="doctorId"
+                    value={formik.values.doctorId}
+                    onChange={(e) =>
+                      formik.setFieldValue('doctorId', Number(e.target.value))
+                    }
+                  >
+                    <option value={0}>Vyber doktora</option>
+                    {myDoctorList
+                      ?.filter(
+                        (doc) =>
+                          doc.speciality
+                            .toLowerCase()
+                            .startsWith(
+                              formik.values.speciality.toLowerCase(),
+                            ) && formik.values.speciality.length > 2,
+                      )
+                      .map((doc) => (
+                        <option key={doc.id} value={doc.id}>
+                          {doc.speciality} {doc.name && ' - ' + doc.name}
+                        </option>
+                      ))}
+                  </select>
+                </label>
               </>
             ) : null}
 
@@ -180,6 +190,7 @@ export const AddAppointmentForm = ({
                 Domů
               </Link>
             </div>
+            <pre>{JSON.stringify(formik.values, null, 2)}</pre>
           </Form>
         )}
       </Formik>

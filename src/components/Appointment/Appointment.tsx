@@ -5,6 +5,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { db } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { dbDoctorText } from '../../text/dbDoctorText';
 
 interface appointmentDataProp {
   id: number;
@@ -28,6 +29,11 @@ export const Appointment: React.FC<appointmentDataProp> = ({
   const doctors = useLiveQuery(() => db.doctors.toArray());
   const doctorData = doctors?.find((doctor) => doctor.id === doctorId);
 
+  console.log('Doctors:');
+  console.log(doctors);
+  console.log('doctorId:');
+  console.log(doctorId);
+  console.log('DoctorData:');
   console.log(doctorData);
 
   return (
@@ -48,6 +54,40 @@ export const Appointment: React.FC<appointmentDataProp> = ({
           }
         >
           <li>
+            {' '}
+            {doctorData?.name ? (
+              <li>
+                <strong>Jméno: </strong> {doctorData?.name}
+              </li>
+            ) : null}
+            {doctorData?.address ? (
+              <li>
+                <strong>Adresa:</strong> {doctorData?.address}
+              </li>
+            ) : null}
+            {doctorData?.addressDetail ? (
+              <li>
+                <strong>Poznámka k adrese:</strong> {doctorData?.addressDetail}
+              </li>
+            ) : null}
+            {doctorData?.phone ? (
+              <li>
+                <strong>Telefon:</strong>{' '}
+                <a href={`tel:${doctorData?.phone}`}>{doctorData?.phone}</a>
+              </li>
+            ) : null}
+            {doctorData?.email ? (
+              <li>
+                <strong>E-mail:</strong>{' '}
+                <a href={`mailto:${doctorData?.email}`}>{doctorData?.email}</a>
+              </li>
+            ) : null}
+            {doctorData?.frequency ? (
+              <li>
+                <strong>Pravidelnost prohlídek:</strong>{' '}
+                {dbDoctorText(doctorData?.frequency)}
+              </li>
+            ) : null}
             <span className="doctor__menu">
               <Link to={`/appointments/${id}`}>
                 <MdEdit className="doctor__icon" />

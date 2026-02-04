@@ -140,7 +140,14 @@ export const EditAppointmentPage: React.FC = () => {
               ).length >= 1 ? (
                 <>
                   <label className="addForm__label">Vyber doktora</label>
-                  <select>
+                  <select
+                    name="doctorId"
+                    value={formik.values.doctorId}
+                    onChange={(e) =>
+                      formik.setFieldValue('doctorId', Number(e.target.value))
+                    }
+                  >
+                    <option value={0}>Vyber doktora</option>
                     {myDoctorList
                       ?.filter(
                         (doc) =>
