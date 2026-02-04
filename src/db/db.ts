@@ -1,3 +1,4 @@
+import type { Temporal } from '@js-temporal/polyfill';
 import Dexie, { type EntityTable } from 'dexie';
 
 interface DoctorDataProp {
@@ -14,7 +15,7 @@ interface DoctorDataProp {
 
 interface AppointmentDataProp {
   id: number;
-  date: Date /* use library Temporal */;
+  date: Temporal.PlainDate /* use library Temporal */;
   time: string;
   speciality: string;
   doctorId: number;

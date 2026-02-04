@@ -7,6 +7,7 @@ import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { useLiveQuery } from 'dexie-react-hooks';
+import { Temporal } from '@js-temporal/polyfill';
 
 type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -61,7 +62,7 @@ export const AddAppointmentForm = ({
     <>
       <Formik<NewAppointmentData>
         initialValues={{
-          date: new Date(),
+          date: Temporal.Now.plainDateISO(),
           time: '',
           speciality: '',
           doctorId: 0,
@@ -75,19 +76,22 @@ export const AddAppointmentForm = ({
               <span>
                 Datum <span className="formRequired">*</span>
               </span>
-              <Field
-                name="date"
+              <input
                 type="date"
+                name="date"
                 className={
                   formik.touched.date && formik.errors.date
                     ? 'addForm__input input--error'
                     : 'addForm__input'
                 }
-              />
-              <ErrorMessage
-                name="date"
-                component="p"
-                className="addForm__errorMessage"
+                value={formik.values.date.toString()}
+                onChange={(e) =>
+                  formik.setFieldValue(
+                    'date',
+                    Temporal.PlainDate.from(e.target.value),
+                  )
+                }
+                onBlur={formik.handleBlur}
               />
             </label>
             <label className="addForm__label">
@@ -185,12 +189,12 @@ export const AddAppointmentForm = ({
                 type="submit"
                 className="onClick__style button button--primary"
                 value="Zapsat termín"
+                disabled={formik.values.doctorId === 0 ? true : false}
               />
               <Link to="/" className="onClick__style button">
                 Domů
               </Link>
             </div>
-            <pre>{JSON.stringify(formik.values, null, 2)}</pre>
           </Form>
         )}
       </Formik>
