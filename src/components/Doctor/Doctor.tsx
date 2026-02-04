@@ -5,8 +5,7 @@ import { dbDoctorText } from '../../text/dbDoctorText';
 import { Link } from 'react-router';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMdArrowDropup } from 'react-icons/io';
-import { MdEdit, MdDelete } from 'react-icons/md';
-import { db } from '../../db/db';
+import { MdEdit } from 'react-icons/md';
 
 interface doctorDataProp {
   id: number;
@@ -94,14 +93,6 @@ export const Doctor: React.FC<doctorDataProp> = ({
                 }
               />
             </Link>
-            <MdDelete
-              className={
-                current === 0
-                  ? 'doctor__icon'
-                  : 'doctor__icon doctor__icon--inactive'
-              }
-              onClick={async () => await db.doctors.delete(id)}
-            />
           </span>
         </li>
       </ul>

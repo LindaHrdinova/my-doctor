@@ -4,18 +4,11 @@ import { Link } from 'react-router';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { db } from '../../db/db';
+import type { AppointmentDataProp } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { dbDoctorText } from '../../text/dbDoctorText';
 
-interface appointmentDataProp {
-  id: number;
-  date: Date;
-  time: string;
-  speciality: string;
-  doctorId: number;
-}
-
-export const Appointment: React.FC<appointmentDataProp> = ({
+export const Appointment: React.FC<AppointmentDataProp> = ({
   id,
   date,
   time,
@@ -28,13 +21,6 @@ export const Appointment: React.FC<appointmentDataProp> = ({
   //doctor data
   const doctors = useLiveQuery(() => db.doctors.toArray());
   const doctorData = doctors?.find((doctor) => doctor.id === doctorId);
-
-  console.log('Doctors:');
-  console.log(doctors);
-  console.log('doctorId:');
-  console.log(doctorId);
-  console.log('DoctorData:');
-  console.log(doctorData);
 
   return (
     <div className="appointment">
@@ -53,51 +39,56 @@ export const Appointment: React.FC<appointmentDataProp> = ({
               : 'animation__data '
           }
         >
-          <li>
-            {' '}
-            {doctorData?.name ? (
-              <li>
-                <strong>Jméno: </strong> {doctorData?.name}
-              </li>
-            ) : null}
-            {doctorData?.address ? (
-              <li>
-                <strong>Adresa:</strong> {doctorData?.address}
-              </li>
-            ) : null}
-            {doctorData?.addressDetail ? (
-              <li>
-                <strong>Poznámka k adrese:</strong> {doctorData?.addressDetail}
-              </li>
-            ) : null}
-            {doctorData?.phone ? (
-              <li>
-                <strong>Telefon:</strong>{' '}
-                <a href={`tel:${doctorData?.phone}`}>{doctorData?.phone}</a>
-              </li>
-            ) : null}
-            {doctorData?.email ? (
-              <li>
-                <strong>E-mail:</strong>{' '}
-                <a href={`mailto:${doctorData?.email}`}>{doctorData?.email}</a>
-              </li>
-            ) : null}
-            {doctorData?.frequency ? (
-              <li>
-                <strong>Pravidelnost prohlídek:</strong>{' '}
-                {dbDoctorText(doctorData?.frequency)}
-              </li>
-            ) : null}
-            <span className="doctor__menu">
-              <Link to={`/appointments/${id}`}>
-                <MdEdit className="doctor__icon" />
-              </Link>
-              <MdDelete
-                className="doctor__icon"
-                onClick={async () => await db.appointments.delete(id)}
-              />
-            </span>
-          </li>
+          {doctorData?.name ? (
+            <li>
+              <strong>Jméno: </strong> {doctorData?.name}
+            </li>
+          ) : null}
+          {doctorData?.address ? (
+            <li>
+              <strong>Adresa:</strong> {doctorData?.address}
+            </li>
+          ) : null}
+          {doctorData?.addressDetail ? (
+            <li>
+              <strong>Poznámka k adrese:</strong> {doctorData?.addressDetail}
+            </li>
+          ) : null}
+          {doctorData?.phone ? (
+            <li>
+              <strong>Telefon:</strong>{' '}
+              <a href={`tel:${doctorData?.phone}`}>{doctorData?.phone}</a>
+            </li>
+          ) : null}
+          {doctorData?.email ? (
+            <li>
+              <strong>E-mail:</strong>{' '}
+              <a href={`mailto:${doctorData?.email}`}>{doctorData?.email}</a>
+            </li>
+          ) : null}
+          {doctorData?.frequency ? (
+            <li>
+              <strong>Pravidelnost prohlídek:</strong>{' '}
+              {dbDoctorText(doctorData?.frequency)}
+            </li>
+          ) : null}
+          <span className="doctor__menu">
+            <Link to={`/appointments/${id}`}>
+              <MdEdit className="doctor__icon" />
+            </Link>
+            <MdDelete
+              className="doctor__icon"
+              onClick={async () => {
+                const confirmed = window.confirm(
+                  'Opravdu chcete smazat tento termín? Tato akce je nevratná.',
+                );
+
+                if (confirmed) {
+                  await db.appointments.delete(id);
+                }
+              }}
+            />
+          </span>
         </ul>
       </div>
     </div>
