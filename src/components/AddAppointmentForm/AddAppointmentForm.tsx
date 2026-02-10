@@ -100,7 +100,11 @@ export const AddAppointmentForm = ({
                   )
                 }
                 onBlur={formik.handleBlur}
+                required
               />
+              {formik.touched.date && formik.errors.date && (
+                <span className="addForm__errorMessage">text</span>
+              )}
             </label>
             <label className="addForm__label">
               <span>Čas</span>
@@ -155,46 +159,73 @@ export const AddAppointmentForm = ({
                   Vyber doktora
                   <select
                     name="doctorId"
+                    className="addForm__input"
                     value={formik.values.doctorId}
                     onChange={(e) =>
                       formik.setFieldValue('doctorId', Number(e.target.value))
                     }
                   >
                     <option value={0}>Vyber doktora</option>
-                    <optgroup label="Aktivní doktoři"></optgroup>
-                    {myDoctorList
-                      ?.filter(
+
+                    {/* active doctors*/}
+                    {myDoctorList &&
+                      myDoctorList?.filter(
                         (doc) =>
                           doc.current === 0 &&
                           doc.speciality
                             .toLowerCase()
-                            .startsWith(
-                              formik.values.speciality.toLowerCase(),
-                            ) &&
-                          formik.values.speciality.length > 2,
-                      )
-                      .map((doc) => (
-                        <option key={doc.id} value={doc.id}>
-                          {doc.speciality} {doc.name && ' - ' + doc.name}
-                        </option>
-                      ))}
-                    <optgroup label="Neaktivní doktoři"></optgroup>
-                    {myDoctorList
-                      ?.filter(
+                            .startsWith(formik.values.speciality.toLowerCase()),
+                      ).length >= 1 && (
+                        <>
+                          <optgroup label="Aktivní doktoři"></optgroup>
+                          {myDoctorList
+                            ?.filter(
+                              (doc) =>
+                                doc.current === 0 &&
+                                doc.speciality
+                                  .toLowerCase()
+                                  .startsWith(
+                                    formik.values.speciality.toLowerCase(),
+                                  ) &&
+                                formik.values.speciality.length > 2,
+                            )
+                            .map((doc) => (
+                              <option key={doc.id} value={doc.id}>
+                                {doc.speciality} {doc.name && ' - ' + doc.name}
+                              </option>
+                            ))}
+                        </>
+                      )}
+
+                    {/* inactive doctors*/}
+                    {myDoctorList &&
+                      myDoctorList?.filter(
                         (doc) =>
                           doc.current === 1 &&
                           doc.speciality
                             .toLowerCase()
-                            .startsWith(
-                              formik.values.speciality.toLowerCase(),
-                            ) &&
-                          formik.values.speciality.length > 2,
-                      )
-                      .map((doc) => (
-                        <option key={doc.id} value={doc.id}>
-                          {doc.speciality} {doc.name && ' - ' + doc.name}
-                        </option>
-                      ))}
+                            .startsWith(formik.values.speciality.toLowerCase()),
+                      ).length >= 1 && (
+                        <>
+                          <optgroup label="Neaktivní doktoři"></optgroup>
+                          {myDoctorList
+                            ?.filter(
+                              (doc) =>
+                                doc.current === 1 &&
+                                doc.speciality
+                                  .toLowerCase()
+                                  .startsWith(
+                                    formik.values.speciality.toLowerCase(),
+                                  ) &&
+                                formik.values.speciality.length > 2,
+                            )
+                            .map((doc) => (
+                              <option key={doc.id} value={doc.id}>
+                                {doc.speciality} {doc.name && ' - ' + doc.name}
+                              </option>
+                            ))}
+                        </>
+                      )}
                   </select>
                 </label>
               </>
