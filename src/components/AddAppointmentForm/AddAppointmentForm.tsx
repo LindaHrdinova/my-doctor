@@ -26,11 +26,19 @@ export const AddAppointmentForm = ({
 
   //SPECIALITY autocomplete "našeptávač"
   const searchSpeciality = (e: { query: string }) => {
-    const query = e.query.toLocaleLowerCase();
-    const suggestion = myDocSpecList.filter((doc) =>
-      doc.toLowerCase().startsWith(query),
-    );
-    setMyDoctorListSpec(suggestion);
+    const query = e.query.toLowerCase().trim();
+
+    const map = new Map<string, string>();
+
+    myDocSpecList.forEach((doc) => {
+      const normalized = doc.trim().toLowerCase();
+
+      if (normalized.startsWith(query) && !map.has(normalized)) {
+        map.set(normalized, doc.trim());
+      }
+    });
+
+    setMyDoctorListSpec([...map.values()]);
   };
 
   //YUP validation
@@ -153,14 +161,34 @@ export const AddAppointmentForm = ({
                     }
                   >
                     <option value={0}>Vyber doktora</option>
+                    <optgroup label="Aktivní doktoři"></optgroup>
                     {myDoctorList
                       ?.filter(
                         (doc) =>
+                          doc.current === 0 &&
                           doc.speciality
                             .toLowerCase()
                             .startsWith(
                               formik.values.speciality.toLowerCase(),
-                            ) && formik.values.speciality.length > 2,
+                            ) &&
+                          formik.values.speciality.length > 2,
+                      )
+                      .map((doc) => (
+                        <option key={doc.id} value={doc.id}>
+                          {doc.speciality} {doc.name && ' - ' + doc.name}
+                        </option>
+                      ))}
+                    <optgroup label="Neaktivní doktoři"></optgroup>
+                    {myDoctorList
+                      ?.filter(
+                        (doc) =>
+                          doc.current === 1 &&
+                          doc.speciality
+                            .toLowerCase()
+                            .startsWith(
+                              formik.values.speciality.toLowerCase(),
+                            ) &&
+                          formik.values.speciality.length > 2,
                       )
                       .map((doc) => (
                         <option key={doc.id} value={doc.id}>
