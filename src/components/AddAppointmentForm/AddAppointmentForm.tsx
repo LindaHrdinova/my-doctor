@@ -70,7 +70,7 @@ export const AddAppointmentForm = ({
     <>
       <Formik<NewAppointmentData>
         initialValues={{
-          date: Temporal.Now.plainDateISO(),
+          date: Temporal.Now.plainDateISO().toString(),
           time: '',
           speciality: '',
           doctorId: 0,
@@ -80,31 +80,25 @@ export const AddAppointmentForm = ({
       >
         {(formik) => (
           <Form className="addForm">
-            <label className="addForm__label">
+            <label className="addDoctorForm__label">
               <span>
                 Datum <span className="formRequired">*</span>
               </span>
-              <input
-                type="date"
+              <Field
                 name="date"
+                type="date"
                 className={
                   formik.touched.date && formik.errors.date
-                    ? 'addForm__input input--error'
-                    : 'addForm__input'
+                    ? 'addDoctorForm__input input--error'
+                    : 'addDoctorForm__input'
                 }
-                value={formik.values.date.toString()}
-                onChange={(e) =>
-                  formik.setFieldValue(
-                    'date',
-                    Temporal.PlainDate.from(e.target.value),
-                  )
-                }
-                onBlur={formik.handleBlur}
                 required
               />
-              {formik.touched.date && formik.errors.date && (
-                <span className="addForm__errorMessage">text</span>
-              )}
+              <ErrorMessage
+                name="date"
+                component="p"
+                className="addDoctorForm__errorMessage"
+              />
             </label>
             <label className="addForm__label">
               <span>Čas</span>
@@ -120,7 +114,7 @@ export const AddAppointmentForm = ({
               <ErrorMessage
                 name="time"
                 component="p"
-                className="addForm__errorMessage"
+                className="addDoctorForm__errorMessage"
               />
             </label>
             <label className="addDoctorForm__label">
@@ -146,7 +140,6 @@ export const AddAppointmentForm = ({
                 className="addDoctorForm__errorMessage"
               />
             </label>
-
             {formik.values.speciality.length > 2 &&
             myDoctorList &&
             myDoctorList?.filter((doc) =>
@@ -230,7 +223,6 @@ export const AddAppointmentForm = ({
                 </label>
               </>
             ) : null}
-
             {formik.values.speciality.length > 2 &&
             myDoctorList &&
             myDoctorList?.filter((doc) =>
@@ -242,7 +234,6 @@ export const AddAppointmentForm = ({
                 Žádný doktor nenalezen. Chcete přidat nového doktora?
               </Link>
             ) : null}
-
             <div className="addForm__buttons ">
               <input
                 type="submit"
