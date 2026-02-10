@@ -1,4 +1,3 @@
-import type { Temporal } from '@js-temporal/polyfill';
 import Dexie, { type EntityTable } from 'dexie';
 
 interface DoctorDataProp {
