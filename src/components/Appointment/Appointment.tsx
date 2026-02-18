@@ -7,6 +7,7 @@ import { db } from '../../db/db';
 import type { AppointmentDataProp } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { dbDoctorText } from '../../text/dbDoctorText';
+import { humanDate } from '../humanDate/humanDate';
 
 export const Appointment: React.FC<AppointmentDataProp> = ({
   id,
@@ -17,6 +18,7 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
 }) => {
   //const appointments = useLiveQuery(() => db.appointments.toArray());
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
+  console.log(speciality);
 
   //doctor data
   const doctors = useLiveQuery(() => db.doctors.toArray());
@@ -26,10 +28,10 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
     <div className="appointment">
       <div onClick={() => setDetailHidden(!detailHidden)}>
         <h3 className="appointment__title">
-          {date.toString()} {time}
+          {humanDate(date)} {time}
         </h3>
         <span className="onClick__style">
-          {speciality}
+          {doctorData?.speciality}
           {detailHidden ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
         </span>
         <ul
