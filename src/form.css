@@ -21,6 +21,7 @@
 }
 
 .addForm__input {
+  width: 100%;
   border: solid 2px var(--gray-color);
   background-color: var(--white-color);
   border-radius: 5px;

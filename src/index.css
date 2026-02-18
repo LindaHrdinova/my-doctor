@@ -3,6 +3,7 @@
   line-height: 1.5;
   font-weight: 400;
 
+
   --white-color: #F9FCFB;
   --light-color: #d1dbda;
   --lightGreen-color: #35e6ce;
@@ -38,6 +39,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 a {
