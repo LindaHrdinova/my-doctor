@@ -9,10 +9,9 @@ import { useAppointmentsFutureList } from '../AppointmentLists/AppoitmentList';
 ];*/
 
 export const NextAppointment: React.FC = () => {
-  console.log('seznam budoucích termínu');
   console.log(useAppointmentsFutureList());
 
-  const appointments = useAppointmentsFutureList();
+  const appointments = useAppointmentsFutureList()?.slice(0, 3);
 
   return (
     <>
