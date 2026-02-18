@@ -142,6 +142,7 @@ export const EditAppointmentPage: React.FC = () => {
                   <label className="addForm__label">Vyber doktora</label>
                   <select
                     name="doctorId"
+                    className="addForm__input"
                     value={formik.values.doctorId}
                     onChange={(e) =>
                       formik.setFieldValue('doctorId', Number(e.target.value))

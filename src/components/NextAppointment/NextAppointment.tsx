@@ -1,7 +1,6 @@
-import { useLiveQuery } from 'dexie-react-hooks';
 import { Appointment } from '../Appointment/Appointment';
 import './style.css';
-import { db } from '../../db/db';
+import { useAppointmentsFutureList } from '../AppointmentLists/AppoitmentList';
 
 /*const appointmentList = [
   { day: 'St', date: '26.11.2025', time: '18:00', doctor: 'Frontentologie' },
@@ -10,9 +9,10 @@ import { db } from '../../db/db';
 ];*/
 
 export const NextAppointment: React.FC = () => {
-  const appointments = useLiveQuery(() =>
-    db.appointments.orderBy('date').limit(3).toArray(),
-  );
+  console.log('seznam budoucích termínu');
+  console.log(useAppointmentsFutureList());
+
+  const appointments = useAppointmentsFutureList();
 
   return (
     <>
