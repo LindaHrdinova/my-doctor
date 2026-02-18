@@ -5,24 +5,18 @@ import { useAppointmentsFutureList } from '../../components/AppointmentLists/App
 import { useAppointmentsPastList } from '../../components/AppointmentLists/AppoitmentList';
 
 export const AppointmentList: React.FC = () => {
-  const appointmentsPast = useAppointmentsPastList();
   const appointments = useAppointmentsFutureList();
+  const pastAppointments = useAppointmentsPastList();
   return (
     <>
-      <h2>Seznam Past termínů</h2>
-      {appointmentsPast &&
-        appointmentsPast.length > 0 &&
-        appointmentsPast?.map((appointment) => (
-          <Appointment
-            id={appointment.id}
-            key={appointment.id}
-            date={appointment.date}
-            time={appointment.time}
-            speciality={appointment.speciality}
-            doctorId={appointment.doctorId}
-          />
-        ))}
       <h2>Seznam termínů</h2>
+      {pastAppointments && pastAppointments.length > 0 && (
+        <BigButton
+          textButton="Proběhlé termíny"
+          urlButton="/appointments/past-appoitments"
+          primaryButton={false}
+        />
+      )}
       {appointments &&
         appointments.length > 0 &&
         appointments?.map((appointment) => (

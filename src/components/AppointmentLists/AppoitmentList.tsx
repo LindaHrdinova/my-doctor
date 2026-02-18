@@ -4,7 +4,7 @@ import { Temporal } from '@js-temporal/polyfill';
 
 export const useAppointmentsList = () => {
   const appointments = useLiveQuery(() =>
-    db.appointments.orderBy('date').toArray(),
+    db.appointments.orderBy('[date+time]').toArray(),
   );
 
   return appointments;
@@ -39,7 +39,5 @@ export const useAppointmentsPastList = () => {
     )
     .reverse();
 
-  console.log('Past');
-  console.log(pastAppointments);
   return pastAppointments;
 };

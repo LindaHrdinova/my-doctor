@@ -10,6 +10,7 @@ import { AppointmentList } from './pages/AppointmentListPage/AppointmentListPage
 import { AddAppointmentPage } from './pages/AddAppointmentPage/AddAppointmentPage.tsx';
 import { EditDoctorPage } from './pages/EditDoctorPage/EditDoctorPage.tsx';
 import { EditAppointmentPage } from './pages/EditAppointmentPage/EditAppointmentPage.tsx';
+import { PastAppointmentPage } from './pages/PastAppointmentPage/PastAppointmentPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: '/appointments/:idAppointment',
         element: <EditAppointmentPage />,
+      },
+      {
+        path: '/appointments/past-appoitments',
+        element: <PastAppointmentPage />,
       },
     ],
   },

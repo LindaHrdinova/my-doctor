@@ -27,7 +27,7 @@ const db = new Dexie('myDoctor') as Dexie & {
 db.version(1).stores({
   doctors:
     'id++, speciality, name, address, addressDetail, phone, email, frequency, current, [current+speciality]',
-  appointments: 'id++, date, time, speciality, doctorId',
+  appointments: 'id++, date, time, speciality, doctorId, [date+time]',
 });
 
 export type { DoctorDataProp, AppointmentDataProp };
