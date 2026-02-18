@@ -80,7 +80,7 @@ export const AddAppointmentForm = ({
       >
         {(formik) => (
           <Form className="addForm">
-            <label className="addDoctorForm__label">
+            <label className="addForm__label">
               <span>
                 Datum <span className="formRequired">*</span>
               </span>
@@ -89,8 +89,8 @@ export const AddAppointmentForm = ({
                 type="date"
                 className={
                   formik.touched.date && formik.errors.date
-                    ? 'addDoctorForm__input input--error'
-                    : 'addDoctorForm__input'
+                    ? 'addForm__input input--error'
+                    : 'addForm__input'
                 }
                 required
               />
