@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
@@ -7,6 +7,7 @@ import type { DoctorDataProp } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { doctorFrequencyList } from '../../data/doctorFrequency';
 
 type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
@@ -17,14 +18,8 @@ export const EditDoctorPage = () => {
     db.doctors.orderBy('[current+speciality]').toArray(),
   );
   const doctorData = doctors?.find((doc) => doc.id === Number(idDoctor));
-  let doctorDataNew;
-  console.log(doctorDataNew);
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
   const [editDoctorStatus, setEditDoctorStatus] = useState<string>('');
-
-  useEffect(() => {
-    doctorDataNew = doctorData;
-  }, [doctorData]);
 
   //SPECIALITY autocomplete "našeptávač"
   const searchSpeciality = (e: { query: string }) => {
@@ -199,12 +194,12 @@ export const EditDoctorPage = () => {
                   }
                   required
                 >
-                  <option value="">Vyberte možnost</option>
-                  <option value="perYear4">4x ročně</option>
-                  <option value="perYear2">2x ročně</option>
-                  <option value="perYear1">1x ročně</option>
-                  <option value="irregular">nepravidelná</option>
-                  <option value="other">jiné</option>
+                  {' '}
+                  {doctorFrequencyList.map((doctorFrequency, index) => (
+                    <option value={doctorFrequency.value} key={index}>
+                      {doctorFrequency.textCs}
+                    </option>
+                  ))}
                 </Field>
                 <ErrorMessage
                   name="frequency"
@@ -212,7 +207,7 @@ export const EditDoctorPage = () => {
                   className="addDoctorForm__errorMessage"
                 />
               </label>
-              {formik.values.frequency === 'jiné' ? <p>jiné</p> : null}
+              {/* TO DO formik.values.frequency === 'other' ? <p>jiné</p> : null*/}
               <div className="addDoctorForm__buttons ">
                 <input
                   type="submit"

@@ -191,8 +191,8 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 }
                 required
               >
-                {doctorFrequencyList.map((doctorFrequency) => (
-                  <option value={doctorFrequency.value}>
+                {doctorFrequencyList.map((doctorFrequency, index) => (
+                  <option value={doctorFrequency.value} key={index}>
                     {doctorFrequency.textCs}
                   </option>
                 ))}
@@ -203,7 +203,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 className="addDoctorForm__errorMessage"
               />
             </label>
-            {formik.values.frequency === 'jiné' ? <p>jiné</p> : null}
+            {/* TO DO formik.values.frequency === 'other' ? <p>jiné</p> : null*/}
             <div className="addDoctorForm__buttons ">
               <input
                 type="submit"
