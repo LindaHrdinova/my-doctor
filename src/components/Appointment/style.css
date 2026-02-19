@@ -7,6 +7,16 @@
   box-shadow: var(--box-shadow);
 }
 
+.appointment--today {
+  background-color: rgb(120, 20, 4);
+  color: rgb(245, 180, 162);
+}
+
+.appointment--tomorrow {
+  background-color: rgb(130, 59, 9);
+  color: rgb(245, 216, 162);
+}
+
 .appointment__title {
   margin: 7px;
 }
@@ -15,5 +25,15 @@
   .appointment {
     background-color: var(--whiteDark-color);
     color: var(--black-color);
+  }
+
+  .appointment--today {
+    background-color: rgb(245, 180, 162);
+    color: rgb(120, 20, 4)
+  }
+
+  .appointment--tomorrow {
+    background-color: rgb(245, 216, 162);
+    color: rgb(130, 59, 9);
   }
 }

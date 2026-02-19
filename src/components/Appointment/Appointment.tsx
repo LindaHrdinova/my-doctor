@@ -7,7 +7,8 @@ import { db } from '../../db/db';
 import type { AppointmentDataProp } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { dbDoctorText } from '../../text/dbDoctorText';
-import { humanDate } from '../humanDate/humanDate';
+import { humanDate } from '../../util/humanDate/humanDate';
+import { Temporal } from '@js-temporal/polyfill';
 
 export const Appointment: React.FC<AppointmentDataProp> = ({
   id,
@@ -16,18 +17,40 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
   speciality,
   doctorId,
 }) => {
-  //const appointments = useLiveQuery(() => db.appointments.toArray());
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
   console.log(speciality);
+
+  const todayDate = Temporal.Now.plainDateISO();
+  const tommorow = todayDate.add({ days: 1 });
+  console.log(todayDate);
+  console.log('date');
+  console.log(date);
+
+  let appoitmentClass;
+  if (date === todayDate.toString()) {
+    appoitmentClass = 'appointment appointment--today';
+  } else if (date === tommorow.toString()) {
+    appoitmentClass = 'appointment appointment--tomorrow';
+  } else {
+    appoitmentClass = 'appointment';
+  }
+
+  let isToday;
+  if (date === todayDate.toString()) {
+    isToday = '!!! DNES !!! - ';
+  } else if (date === tommorow.toString()) {
+    isToday = '! ZÍTRA ! - ';
+  }
 
   //doctor data
   const doctors = useLiveQuery(() => db.doctors.toArray());
   const doctorData = doctors?.find((doctor) => doctor.id === doctorId);
 
   return (
-    <div className="appointment">
+    <div className={appoitmentClass}>
       <div onClick={() => setDetailHidden(!detailHidden)}>
         <h3 className="appointment__title">
+          {isToday}
           {humanDate(date)} {time}
         </h3>
         <span className="onClick__style">
