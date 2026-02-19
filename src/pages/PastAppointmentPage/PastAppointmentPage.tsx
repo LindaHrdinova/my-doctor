@@ -1,5 +1,5 @@
 import { Appointment } from '../../components/Appointment/Appointment';
-import { useAppointmentsPastList } from '../../components/AppointmentLists/AppoitmentList';
+import { useAppointmentsPastList } from '../../components/AppointmentLists/AppointmentList';
 import { BigButton } from '../../components/BigButton/BigButton';
 
 export const PastAppointmentPage = () => {
@@ -26,7 +26,7 @@ export const PastAppointmentPage = () => {
           />
         ))}
       <BigButton
-        textButton="seznam termínů"
+        textButton="Seznam termínů"
         urlButton="/appointments"
         primaryButton={true}
       />

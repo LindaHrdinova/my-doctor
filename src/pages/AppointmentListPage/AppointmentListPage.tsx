@@ -1,8 +1,8 @@
 import { FaPlus } from 'react-icons/fa';
 import { BigButton } from '../../components/BigButton/BigButton';
 import { Appointment } from '../../components/Appointment/Appointment';
-import { useAppointmentsFutureList } from '../../components/AppointmentLists/AppoitmentList';
-import { useAppointmentsPastList } from '../../components/AppointmentLists/AppoitmentList';
+import { useAppointmentsFutureList } from '../../components/AppointmentLists/AppointmentList';
+import { useAppointmentsPastList } from '../../components/AppointmentLists/AppointmentList';
 
 export const AppointmentList: React.FC = () => {
   const appointments = useAppointmentsFutureList();

@@ -1,6 +1,6 @@
 import { Appointment } from '../Appointment/Appointment';
 import './style.css';
-import { useAppointmentsFutureList } from '../AppointmentLists/AppoitmentList';
+import { useAppointmentsFutureList } from '../AppointmentLists/AppointmentList';
 
 /*const appointmentList = [
   { day: 'St', date: '26.11.2025', time: '18:00', doctor: 'Frontentologie' },

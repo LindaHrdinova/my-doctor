@@ -81,6 +81,8 @@ export const Doctor: React.FC<doctorDataProp> = ({
             <strong>Pravidelnost prohlídek:</strong> {dbDoctorText(frequency)}
           </li>
         ) : null}
+        <li>Budoucí termín</li>
+        <li>Minulý termín</li>
         <li>
           <span className="doctor__menu">
             <Switcher current={current} id={id} />{' '}
