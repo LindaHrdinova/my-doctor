@@ -1,7 +1,7 @@
 import './App.css';
 import { Outlet } from 'react-router';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <>
       <span className="title">

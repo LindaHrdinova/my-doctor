@@ -1,16 +1,19 @@
 import { db } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { Temporal } from '@js-temporal/polyfill';
+import type { AppointmentDataProp } from '../../db/db';
 
-export const useAppointmentsList = () => {
-  const appointments = useLiveQuery(() =>
+export const useAppointmentsList = (): AppointmentDataProp[] | undefined => {
+  const appointments = useLiveQuery<AppointmentDataProp[]>(() =>
     db.appointments.orderBy('[date+time]').toArray(),
   );
 
   return appointments;
 };
 
-export const useAppointmentsFutureList = () => {
+export const useAppointmentsFutureList = ():
+  | AppointmentDataProp[]
+  | undefined => {
   const appointments = useAppointmentsList();
   const todayDate = Temporal.Now.plainDateISO();
 
@@ -25,7 +28,9 @@ export const useAppointmentsFutureList = () => {
   return futureAppointments;
 };
 
-export const useAppointmentsPastList = () => {
+export const useAppointmentsPastList = ():
+  | AppointmentDataProp[]
+  | undefined => {
   const appointments = useAppointmentsList();
   const todayDate = Temporal.Now.plainDateISO();
 

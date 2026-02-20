@@ -1,6 +1,6 @@
 import { Appointment } from '../Appointment/Appointment';
 import './style.css';
-import { useAppointmentsFutureList } from '../AppointmentLists/AppointmentList';
+import { useAppointmentsFutureList } from '../../util/appointmentListHook/appointmentListHook';
 
 /*const appointmentList = [
   { day: 'St', date: '26.11.2025', time: '18:00', doctor: 'Frontentologie' },
@@ -9,8 +9,6 @@ import { useAppointmentsFutureList } from '../AppointmentLists/AppointmentList';
 ];*/
 
 export const NextAppointment: React.FC = () => {
-  console.log(useAppointmentsFutureList());
-
   const appointments = useAppointmentsFutureList()?.slice(0, 3);
 
   return (

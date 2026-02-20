@@ -1,10 +1,8 @@
 import { Appointment } from '../../components/Appointment/Appointment';
-import { useAppointmentsPastList } from '../../components/AppointmentLists/AppointmentList';
+import { useAppointmentsPastList } from '../../util/appointmentListHook/appointmentListHook';
 import { BigButton } from '../../components/BigButton/BigButton';
 
-export const PastAppointmentPage = () => {
-  console.log(useAppointmentsPastList());
-
+export const PastAppointmentPage: React.FC = () => {
   const appointments = useAppointmentsPastList();
 
   return (

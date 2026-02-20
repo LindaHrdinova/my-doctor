@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { db } from '../../db/db';
-import type { AppointmentDataProp } from '../../db/db';
+import type { AppointmentDataProp, DoctorDataProp } from '../../db/db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { dbDoctorText } from '../../text/dbDoctorText';
 import { humanDate } from '../../util/humanDate/humanDate';
@@ -22,9 +22,6 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
 
   const todayDate = Temporal.Now.plainDateISO();
   const tommorow = todayDate.add({ days: 1 });
-  console.log(todayDate);
-  console.log('date');
-  console.log(date);
 
   let appoitmentClass;
   if (date === todayDate.toString()) {
@@ -43,7 +40,7 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
   }
 
   //doctor data
-  const doctors = useLiveQuery(() => db.doctors.toArray());
+  const doctors = useLiveQuery<DoctorDataProp[]>(() => db.doctors.toArray());
   const doctorData = doctors?.find((doctor) => doctor.id === doctorId);
 
   return (

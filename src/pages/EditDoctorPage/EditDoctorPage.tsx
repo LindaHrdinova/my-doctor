@@ -11,10 +11,10 @@ import { doctorFrequencyList } from '../../data/doctorFrequency';
 
 type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
-export const EditDoctorPage = () => {
+export const EditDoctorPage: React.FC = () => {
   const { idDoctor } = useParams();
 
-  const doctors = useLiveQuery(() =>
+  const doctors = useLiveQuery<DoctorDataProp[]>(() =>
     db.doctors.orderBy('[current+speciality]').toArray(),
   );
   const doctorData = doctors?.find((doc) => doc.id === Number(idDoctor));

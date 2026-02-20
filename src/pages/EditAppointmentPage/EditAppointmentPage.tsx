@@ -1,7 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../db/db';
 import { useParams, Link } from 'react-router';
-import type { AppointmentDataProp } from '../../db/db';
+import type { AppointmentDataProp, DoctorDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -14,12 +14,16 @@ export const EditAppointmentPage: React.FC = () => {
 
   type NewAppointmentData = Omit<AppointmentDataProp, 'id'>;
 
-  const appointments = useLiveQuery(() => db.appointments.toArray());
+  const appointments = useLiveQuery<AppointmentDataProp[]>(() =>
+    db.appointments.toArray(),
+  );
   const appointentData = appointments?.find(
     (appointment) => appointment.id === Number(idAppointment),
   );
 
-  const myDoctorList = useLiveQuery(() => db.doctors.toArray());
+  const myDoctorList = useLiveQuery<DoctorDataProp[]>(() =>
+    db.doctors.toArray(),
+  );
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
 
   const [myDoctorListSpec, setMyDoctorListSpec] = useState<string[]>([]);

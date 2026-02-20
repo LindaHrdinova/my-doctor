@@ -1,7 +1,7 @@
 import { BigButton } from '../../components/BigButton/BigButton';
 import { NextAppointment } from '../../components/NextAppointment/NextAppointment';
 
-export const HomePage = () => {
+export const HomePage: React.FC = () => {
   return (
     <main>
       <h2>Homepage</h2>

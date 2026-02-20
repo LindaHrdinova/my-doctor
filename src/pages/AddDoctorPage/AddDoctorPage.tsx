@@ -2,7 +2,7 @@ import './style.css';
 import { AddDoctorForm } from '../../components/AddDoctorForm/AddDoctorForm';
 import { useState } from 'react';
 
-export const AddDoctorPage = () => {
+export const AddDoctorPage: React.FC = () => {
   const [addDoctorStatus, setAddDoctorStatus] = useState<string>('');
 
   return (

@@ -4,6 +4,7 @@ import { BigButton } from '../../components/BigButton/BigButton';
 import { FaPlus } from 'react-icons/fa';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../db/db';
+import type { DoctorDataProp } from '../../db/db';
 
 /* const doctorListData: doctorListDataProp[] = [
   {
@@ -39,7 +40,7 @@ import { db } from '../../db/db';
 ];*/
 
 export const DoctorList: React.FC = () => {
-  const doctors = useLiveQuery(() =>
+  const doctors = useLiveQuery<DoctorDataProp[]>(() =>
     db.doctors.orderBy('[current+speciality]').toArray(),
   );
   return (

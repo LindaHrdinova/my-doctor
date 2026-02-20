@@ -1,7 +1,7 @@
 import { AddAppointmentForm } from '../../components/AddAppointmentForm/AddAppointmentForm';
 import { useState } from 'react';
 
-export const AddAppointmentPage = () => {
+export const AddAppointmentPage: React.FC = () => {
   const [addAppointmentStatus, setAddAppointmentStatus] = useState<string>('');
 
   return (
