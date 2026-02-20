@@ -2,9 +2,10 @@ import type React from 'react';
 import { Doctor } from '../../components/Doctor/Doctor';
 import { BigButton } from '../../components/BigButton/BigButton';
 import { FaPlus } from 'react-icons/fa';
-import { useLiveQuery } from 'dexie-react-hooks';
-import { db } from '../../db/db';
-import type { DoctorDataProp } from '../../db/db';
+import {
+  useDoctorCurrentList,
+  useDoctorPastList,
+} from '../../util/doctorListHook/doctorListHook';
 
 /* const doctorListData: doctorListDataProp[] = [
   {
@@ -40,13 +41,21 @@ import type { DoctorDataProp } from '../../db/db';
 ];*/
 
 export const DoctorList: React.FC = () => {
-  const doctors = useLiveQuery<DoctorDataProp[]>(() =>
-    db.doctors.orderBy('[current+speciality]').toArray(),
-  );
+  const doctors = useDoctorCurrentList();
+  const pastDoctors = useDoctorPastList();
+
   return (
     <>
       <h2>Seznam doktorů</h2>
-      {/* data from db */}
+
+      {pastDoctors && pastDoctors.length > 0 && (
+        <BigButton
+          urlButton="/doctors/past-doctors"
+          textButton="Archivovaní doktoři"
+          primaryButton={false}
+        />
+      )}
+
       {doctors &&
         doctors.length > 0 &&
         doctors?.map((doctor) => (
@@ -64,9 +73,6 @@ export const DoctorList: React.FC = () => {
           />
         ))}
 
-      {doctors && doctors.length === 0 && (
-        <p>Zatím nemáte žádného doktora ve svém adresáři.</p>
-      )}
       <BigButton
         urlButton="/new-doctor"
         textButton={<FaPlus />}

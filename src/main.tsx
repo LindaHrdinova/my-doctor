@@ -11,6 +11,7 @@ import { AddAppointmentPage } from './pages/AddAppointmentPage/AddAppointmentPag
 import { EditDoctorPage } from './pages/EditDoctorPage/EditDoctorPage.tsx';
 import { EditAppointmentPage } from './pages/EditAppointmentPage/EditAppointmentPage.tsx';
 import { PastAppointmentPage } from './pages/PastAppointmentPage/PastAppointmentPage.tsx';
+import { PastDoctorPage } from './pages/PastDoctorPage/PastDoctorPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '/doctors/:idDoctor',
         element: <EditDoctorPage />,
+      },
+      {
+        path: '/doctors/past-doctors',
+        element: <PastDoctorPage />,
       },
       {
         path: '/new-doctor',

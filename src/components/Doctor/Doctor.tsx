@@ -33,7 +33,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
 
   return (
-    <div className={current === 0 ? 'doctor' : 'doctor doctor--inactive'}>
+    <div className="doctor">
       <h3
         className="doctor__title onClick__style"
         onClick={() => setDetailHidden(!detailHidden)}
