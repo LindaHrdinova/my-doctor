@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { db } from '../../db/db';
-import type { AppointmentDataProp, DoctorDataProp } from '../../db/db';
+import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { useLiveQuery } from 'dexie-react-hooks';
 import { Temporal } from '@js-temporal/polyfill';
+import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
 
 type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -19,9 +19,8 @@ export const AddAppointmentForm = ({
   type NewAppointmentData = Omit<AppointmentDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
   //const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
-  const myDoctorList = useLiveQuery<DoctorDataProp[]>(() =>
-    db.doctors.toArray(),
-  );
+  const myDoctorList = useDoctorList();
+
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
 
   const [myDoctorListSpec, setMyDoctorListSpec] = useState<string[]>([]);

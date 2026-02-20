@@ -4,11 +4,11 @@ import { Link } from 'react-router';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { db } from '../../db/db';
-import type { AppointmentDataProp, DoctorDataProp } from '../../db/db';
-import { useLiveQuery } from 'dexie-react-hooks';
+import type { AppointmentDataProp } from '../../db/db';
 import { dbDoctorText } from '../../text/dbDoctorText';
 import { humanDate } from '../../util/humanDate/humanDate';
 import { Temporal } from '@js-temporal/polyfill';
+import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
 
 export const Appointment: React.FC<AppointmentDataProp> = ({
   id,
@@ -40,7 +40,7 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
   }
 
   //doctor data
-  const doctors = useLiveQuery<DoctorDataProp[]>(() => db.doctors.toArray());
+  const doctors = useDoctorList();
   const doctorData = doctors?.find((doctor) => doctor.id === doctorId);
 
   return (

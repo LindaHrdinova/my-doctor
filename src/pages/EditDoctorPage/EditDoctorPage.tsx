@@ -4,20 +4,19 @@ import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
 import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
-import { useLiveQuery } from 'dexie-react-hooks';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { doctorFrequencyList } from '../../data/doctorFrequency';
+import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
 
 type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
 export const EditDoctorPage: React.FC = () => {
   const { idDoctor } = useParams();
 
-  const doctors = useLiveQuery<DoctorDataProp[]>(() =>
-    db.doctors.orderBy('[current+speciality]').toArray(),
-  );
+  const doctors = useDoctorList();
   const doctorData = doctors?.find((doc) => doc.id === Number(idDoctor));
+
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
   const [editDoctorStatus, setEditDoctorStatus] = useState<string>('');
 

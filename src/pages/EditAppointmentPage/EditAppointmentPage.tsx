@@ -1,4 +1,3 @@
-import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../../db/db';
 import { useParams, Link } from 'react-router';
 import type { AppointmentDataProp, DoctorDataProp } from '../../db/db';
@@ -6,6 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { AutoComplete } from 'primereact/autocomplete';
+import { useAppointmentsList } from '../../util/appointmentListHook/appointmentListHook';
+import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
 
 export const EditAppointmentPage: React.FC = () => {
   const { idAppointment } = useParams();
@@ -14,16 +15,14 @@ export const EditAppointmentPage: React.FC = () => {
 
   type NewAppointmentData = Omit<AppointmentDataProp, 'id'>;
 
-  const appointments = useLiveQuery<AppointmentDataProp[]>(() =>
-    db.appointments.toArray(),
-  );
+  const appointments = useAppointmentsList();
+
   const appointentData = appointments?.find(
     (appointment) => appointment.id === Number(idAppointment),
   );
 
-  const myDoctorList = useLiveQuery<DoctorDataProp[]>(() =>
-    db.doctors.toArray(),
-  );
+  const myDoctorList = useDoctorList();
+
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
 
   const [myDoctorListSpec, setMyDoctorListSpec] = useState<string[]>([]);
