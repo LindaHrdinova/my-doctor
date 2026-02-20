@@ -1,6 +1,6 @@
 import { db } from '../../db/db';
 import { useParams, Link } from 'react-router';
-import type { AppointmentDataProp, DoctorDataProp } from '../../db/db';
+import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
