@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { db } from '../../db/db';
-import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import { Temporal } from '@js-temporal/polyfill';
@@ -13,12 +12,16 @@ type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
 };
 
+type AppointmentFormValues = {
+  date: string;
+  time: string;
+  doctorId: number;
+  speciality: string; // just for <AutoComplete> and <select>
+};
+
 export const AddAppointmentForm = ({
   setAddAppointmentStatus,
 }: AddAppointmentFormProps) => {
-  type NewAppointmentData = Omit<AppointmentDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
-
-  //const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
   const myDoctorList = useDoctorList();
 
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
@@ -53,11 +56,12 @@ export const AddAppointmentForm = ({
   });
 
   const handleSubmitFormik = async (
-    formData: NewAppointmentData,
-    { resetForm }: FormikHelpers<NewAppointmentData>,
+    formData: AppointmentFormValues,
+    { resetForm }: FormikHelpers<AppointmentFormValues>,
   ) => {
     try {
-      await db.appointments.add(formData);
+      const { speciality, ...dataToSave } = formData;
+      await db.appointments.add(dataToSave);
       setAddAppointmentStatus(`Nový termín byl přidán do diáře!`);
 
       resetForm();
@@ -69,7 +73,7 @@ export const AddAppointmentForm = ({
 
   return (
     <>
-      <Formik<NewAppointmentData>
+      <Formik<AppointmentFormValues>
         initialValues={{
           date: Temporal.Now.plainDateISO().toString(),
           time: '',
@@ -131,7 +135,10 @@ export const AddAppointmentForm = ({
                 value={formik.values.speciality}
                 suggestions={myDoctorListSpec}
                 completeMethod={searchSpeciality}
-                onChange={(e) => formik.setFieldValue('speciality', e.value)}
+                onChange={(e) => {
+                  formik.setFieldValue('speciality', e.value);
+                  formik.setFieldValue('doctorId', 0);
+                }}
                 onBlur={() => formik.setFieldTouched('speciality', true)}
                 required
               />

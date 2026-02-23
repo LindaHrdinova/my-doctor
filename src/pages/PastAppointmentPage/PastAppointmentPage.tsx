@@ -19,7 +19,6 @@ export const PastAppointmentPage: React.FC = () => {
             key={appointment.id}
             date={appointment.date}
             time={appointment.time}
-            speciality={appointment.speciality}
             doctorId={appointment.doctorId}
           />
         ))}

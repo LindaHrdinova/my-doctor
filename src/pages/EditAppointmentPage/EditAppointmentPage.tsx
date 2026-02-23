@@ -1,6 +1,5 @@
 import { db } from '../../db/db';
 import { useParams, Link } from 'react-router';
-import type { AppointmentDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
@@ -13,17 +12,24 @@ export const EditAppointmentPage: React.FC = () => {
   const [editAppointmentStatus, setEditAppointmentStatus] =
     useState<string>('');
 
-  type NewAppointmentData = Omit<AppointmentDataProp, 'id'>;
-
+  type AppointmentFormValues = {
+    date: string;
+    time: string;
+    doctorId: number;
+    speciality: string; // 👈 jen UI
+  };
   const appointments = useAppointmentsList();
 
   const appointentData = appointments?.find(
     (appointment) => appointment.id === Number(idAppointment),
   );
-
   const myDoctorList = useDoctorList();
-
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
+  console.log(myDoctorList);
+
+  const doctorData = myDoctorList?.find(
+    (doc) => doc.id === appointentData?.doctorId,
+  );
 
   const [myDoctorListSpec, setMyDoctorListSpec] = useState<string[]>([]);
 
@@ -54,12 +60,12 @@ export const EditAppointmentPage: React.FC = () => {
       <>
         <h2>Úprava termínu</h2>
         {editAppointmentStatus && <p>{editAppointmentStatus}</p>}
-        <Formik<NewAppointmentData>
+        <Formik<AppointmentFormValues>
           initialValues={{
             date: appointentData.date ?? '',
             time: appointentData.time ?? '',
-            speciality: appointentData.speciality ?? '',
-            doctorId: appointentData.doctorId ?? '',
+            speciality: doctorData?.speciality ?? '',
+            doctorId: appointentData.doctorId ?? 0,
           }}
           validationSchema={SignupSchema}
           onSubmit={async (formData) => {
@@ -123,7 +129,10 @@ export const EditAppointmentPage: React.FC = () => {
                   value={formik.values.speciality}
                   suggestions={myDoctorListSpec}
                   completeMethod={searchSpeciality}
-                  onChange={(e) => formik.setFieldValue('speciality', e.value)}
+                  onChange={(e) => {
+                    formik.setFieldValue('speciality', e.value);
+                    formik.setFieldValue('doctorId', 0);
+                  }}
                   onBlur={() => formik.setFieldTouched('speciality', true)}
                   required
                 />
