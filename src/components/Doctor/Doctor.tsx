@@ -71,7 +71,13 @@ export const Doctor: React.FC<doctorDataProp> = ({
         {address ? (
           <li>
             <strong>Adresa:</strong>{' '}
-            <a href={`https://mapy.cz/zakladni?q=${address}`}>{address}</a>
+            <a
+              href={`https://mapy.cz/zakladni?q=${address}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {address}
+            </a>
           </li>
         ) : null}
         {addressDetail ? (
