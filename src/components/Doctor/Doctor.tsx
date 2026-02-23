@@ -70,7 +70,8 @@ export const Doctor: React.FC<doctorDataProp> = ({
         ) : null}
         {address ? (
           <li>
-            <strong>Adresa:</strong> {address}
+            <strong>Adresa:</strong>{' '}
+            <a href={`https://mapy.cz/zakladni?q=${address}`}>{address}</a>
           </li>
         ) : null}
         {addressDetail ? (
