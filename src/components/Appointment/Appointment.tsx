@@ -68,7 +68,14 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
           ) : null}
           {doctorData?.address ? (
             <li>
-              <strong>Adresa:</strong> {doctorData?.address}
+              <strong>Adresa: </strong>
+              <a
+                href={`https://mapy.cz/zakladni?q=${doctorData?.address}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {doctorData?.address}
+              </a>
             </li>
           ) : null}
           {doctorData?.addressDetail ? (
