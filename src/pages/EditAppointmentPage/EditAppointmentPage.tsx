@@ -25,7 +25,6 @@ export const EditAppointmentPage: React.FC = () => {
   );
   const myDoctorList = useDoctorList();
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
-  console.log(myDoctorList);
 
   const doctorData = myDoctorList?.find(
     (doc) => doc.id === appointentData?.doctorId,
@@ -196,6 +195,7 @@ export const EditAppointmentPage: React.FC = () => {
                   type="submit"
                   className="onClick__style button button--primary"
                   value="Upravit termín"
+                  disabled={formik.values.doctorId === 0 ? true : false}
                 />
                 <Link to="/" className="onClick__style button">
                   Domů
