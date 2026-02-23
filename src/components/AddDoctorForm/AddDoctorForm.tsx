@@ -8,6 +8,7 @@ import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import * as Yup from 'yup';
+import { appointmentReminderList } from '../../data/appointmentReminder';
 
 type AddDoctorFormProps = {
   setAddDoctorStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -17,6 +18,8 @@ type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataPr
 
 export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
   const [suggestDocSpec, setSuggestDocSpec] = useState<string[]>([]);
+
+  console.log(appointmentReminderList);
 
   //SPECIALITY autocomplete "našeptávač"
   const searchSpeciality = (e: { query: string }) => {
@@ -66,6 +69,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
           phone: '',
           email: '',
           frequency: '',
+          reminder: '',
           current: 0,
         }}
         validationSchema={SignupSchema}
@@ -191,8 +195,11 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
                 }
                 required
               >
-                {doctorFrequencyList.map((doctorFrequency, index) => (
-                  <option value={doctorFrequency.value} key={index}>
+                {doctorFrequencyList.map((doctorFrequency) => (
+                  <option
+                    value={doctorFrequency.value}
+                    key={doctorFrequency.value}
+                  >
                     {doctorFrequency.textCs}
                   </option>
                 ))}
@@ -204,6 +211,35 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
               />
             </label>
             {/* TO DO formik.values.frequency === 'other' ? <p>jiné</p> : null*/}
+            {!(
+              formik.values.frequency === 'irregular' ||
+              formik.values.frequency === 'other' ||
+              formik.values.frequency === ''
+            ) ? (
+              <label className="addDoctorForm__label">
+                Připomínka objednání dalšího termínu:
+                <Field
+                  name="reminder"
+                  as="select"
+                  className={
+                    formik.touched.reminder && formik.errors.reminder
+                      ? 'addDoctorForm__input input--error'
+                      : 'addDoctorForm__input'
+                  }
+                >
+                  {appointmentReminderList.map((appReminder) => (
+                    <option value={appReminder.value} key={appReminder.value}>
+                      {appReminder.textCs}
+                    </option>
+                  ))}
+                </Field>
+                <ErrorMessage
+                  name="reminder"
+                  component="p"
+                  className="addDoctorForm__errorMessage"
+                />
+              </label>
+            ) : null}
             <div className="addDoctorForm__buttons ">
               <input
                 type="submit"

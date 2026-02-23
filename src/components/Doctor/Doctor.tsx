@@ -11,20 +11,10 @@ import {
   useAppointmentsPastList,
 } from '../../util/appointmentListHook/appointmentListHook';
 import { humanDate } from '../../util/humanDate/humanDate';
+import type { DoctorDataProp } from '../../db/db';
+import { appointmentTextReminder } from '../../text/appointmentReminderText';
 
-interface doctorDataProp {
-  id: number;
-  speciality: string;
-  name: string;
-  address: string;
-  addressDetail: string;
-  phone: string;
-  email: string;
-  frequency: string;
-  current: number;
-}
-
-export const Doctor: React.FC<doctorDataProp> = ({
+export const Doctor: React.FC<DoctorDataProp> = ({
   id,
   speciality,
   name,
@@ -33,6 +23,7 @@ export const Doctor: React.FC<doctorDataProp> = ({
   phone,
   email,
   frequency,
+  reminder,
   current,
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
@@ -98,6 +89,12 @@ export const Doctor: React.FC<doctorDataProp> = ({
         {frequency ? (
           <li>
             <strong>Pravidelnost prohlídek:</strong> {dbDoctorText(frequency)}
+          </li>
+        ) : null}
+        {reminder ? (
+          <li>
+            <strong>Připomínka objednání: </strong>
+            {appointmentTextReminder(reminder)}
           </li>
         ) : null}
         <li>

@@ -9,6 +9,7 @@ interface DoctorDataProp {
   phone: string;
   email: string;
   frequency: string;
+  reminder: string;
   current: number /* 0 true, 1 false*/;
 }
 
@@ -25,7 +26,7 @@ const db = new Dexie('myDoctor') as Dexie & {
 };
 db.version(1).stores({
   doctors:
-    'id++, speciality, name, address, addressDetail, phone, email, frequency, current, [current+speciality]',
+    'id++, speciality, name, address, addressDetail, phone, email, frequency, reminder, current, [current+speciality]',
   appointments: 'id++, date, time, doctorId, [date+time]',
 });
 

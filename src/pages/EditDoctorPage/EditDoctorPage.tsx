@@ -8,6 +8,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { doctorFrequencyList } from '../../data/doctorFrequency';
 import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
+import { appointmentReminderList } from '../../data/appointmentReminder';
 
 type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
@@ -59,6 +60,7 @@ export const EditDoctorPage: React.FC = () => {
             addressDetail: doctorData.addressDetail ?? '',
             phone: doctorData.phone ?? '',
             email: doctorData.email ?? '',
+            reminder: doctorData.reminder ?? '',
             frequency: doctorData.frequency ?? '',
             current: doctorData.current ?? 0,
           }}
@@ -207,6 +209,35 @@ export const EditDoctorPage: React.FC = () => {
                 />
               </label>
               {/* TO DO formik.values.frequency === 'other' ? <p>jiné</p> : null*/}
+              {!(
+                formik.values.frequency === 'irregular' ||
+                formik.values.frequency === 'other' ||
+                formik.values.frequency === ''
+              ) ? (
+                <label className="addDoctorForm__label">
+                  Připomínka objednání dalšího termínu:
+                  <Field
+                    name="reminder"
+                    as="select"
+                    className={
+                      formik.touched.reminder && formik.errors.reminder
+                        ? 'addDoctorForm__input input--error'
+                        : 'addDoctorForm__input'
+                    }
+                  >
+                    {appointmentReminderList.map((appReminder) => (
+                      <option value={appReminder.value} key={appReminder.value}>
+                        {appReminder.textCs}
+                      </option>
+                    ))}
+                  </Field>
+                  <ErrorMessage
+                    name="reminder"
+                    component="p"
+                    className="addDoctorForm__errorMessage"
+                  />
+                </label>
+              ) : null}
               <div className="addDoctorForm__buttons ">
                 <input
                   type="submit"

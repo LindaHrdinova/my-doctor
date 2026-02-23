@@ -24,6 +24,7 @@ export const PastDoctorPage: React.FC = () => {
             phone={doctor.phone}
             email={doctor.email}
             frequency={doctor.frequency}
+            reminder={doctor.reminder}
             current={doctor.current}
           />
         ))}
