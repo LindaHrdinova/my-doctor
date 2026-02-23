@@ -56,7 +56,6 @@ export const Doctor: React.FC<doctorDataProp> = ({
           {detailHidden ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
         </span>
       </h3>
-
       <ul
         className={
           detailHidden
