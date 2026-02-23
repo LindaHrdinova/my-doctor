@@ -14,11 +14,9 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
   id,
   date,
   time,
-  speciality,
   doctorId,
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
-  console.log(speciality);
 
   const todayDate = Temporal.Now.plainDateISO();
   const tommorow = todayDate.add({ days: 1 });
