@@ -6,6 +6,11 @@ import { Link } from 'react-router';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { IoMdArrowDropup } from 'react-icons/io';
 import { MdEdit } from 'react-icons/md';
+import {
+  useAppointmentsFutureList,
+  useAppointmentsPastList,
+} from '../../util/appointmentListHook/appointmentListHook';
+import { humanDate } from '../../util/humanDate/humanDate';
 
 interface doctorDataProp {
   id: number;
@@ -31,6 +36,14 @@ export const Doctor: React.FC<doctorDataProp> = ({
   current,
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
+
+  const appointmentsFuture = useAppointmentsFutureList();
+  const appointmentPast = useAppointmentsPastList();
+
+  const thisDocAppFuture = appointmentsFuture?.find(
+    (app) => app.doctorId === id,
+  );
+  const thisDocAppPast = appointmentPast?.find((app) => app.doctorId === id);
 
   return (
     <div className="doctor">
@@ -81,8 +94,25 @@ export const Doctor: React.FC<doctorDataProp> = ({
             <strong>Pravidelnost prohlídek:</strong> {dbDoctorText(frequency)}
           </li>
         ) : null}
-        <li>Budoucí termín</li>
-        <li>Minulý termín</li>
+        <li>
+          <strong>Budoucí termín: </strong>
+          {thisDocAppFuture ? (
+            <>
+              {humanDate(thisDocAppFuture.date)} {thisDocAppFuture.time}
+            </>
+          ) : (
+            <>
+              Nenastaveno.{' '}
+              <Link to="/new-appointment">Nastavit příští termín</Link>
+            </>
+          )}
+        </li>
+        {thisDocAppPast ? (
+          <li>
+            <strong>Minulý termín: </strong>
+            {humanDate(thisDocAppPast.date)} {thisDocAppPast.time}
+          </li>
+        ) : null}
         <li>
           <span className="doctor__menu">
             <Switcher current={current} id={id} />{' '}
