@@ -1,5 +1,6 @@
 import { BigButton } from '../../components/BigButton/BigButton';
 import { NextAppointment } from '../../components/NextAppointment/NextAppointment';
+import { TestDataFiller } from '../../components/TestDataFiller/TestDataFiller';
 
 export const HomePage: React.FC = () => {
   return (
@@ -26,6 +27,8 @@ export const HomePage: React.FC = () => {
         urlButton="/new-doctor"
         primaryButton={true}
       />
+
+      <TestDataFiller />
     </main>
   );
 };
