@@ -11,7 +11,7 @@ export const Switcher: React.FC<switchProp> = ({ id, current }) => {
     <label className="switch">
       <input
         type="checkbox"
-        checked={current === 0 ? true : false}
+        checked={current === 0}
         onChange={async (e) => {
           await db.doctors.update(id, { current: e.target.checked ? 0 : 1 });
         }}

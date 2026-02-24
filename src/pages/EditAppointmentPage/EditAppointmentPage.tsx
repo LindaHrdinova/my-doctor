@@ -187,7 +187,7 @@ export const EditAppointmentPage: React.FC = () => {
                   type="submit"
                   className="onClick__style button button--primary"
                   value="Upravit termín"
-                  disabled={formik.values.doctorId === 0 ? true : false}
+                  disabled={formik.values.doctorId === 0}
                 />
                 <Link to="/" className="onClick__style button">
                   Domů
