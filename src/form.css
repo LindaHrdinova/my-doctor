@@ -29,7 +29,6 @@
   padding: 7px;
 }
 
-
 .addForm__autoComplete>input {
   width: 100%;
   border: solid 2px var(--white-color);
@@ -74,7 +73,6 @@ input.p-inputtext {
 }
 
 /* ERROR MESSAGE */
-
 .addForm__errorMessage {
   color: #d9534f;
   font-size: 0.875rem;
@@ -95,8 +93,6 @@ input.input--error,
   font-weight: 900;
   margin-left: 2px;
 }
-
-
 
 @media (prefers-color-scheme: light) {
 
@@ -128,5 +124,13 @@ input.input--error,
 
   .formRequired {
     color: #db0a03;
+  }
+}
+
+@media (max-width: 260px) {
+
+  .addForm__buttons {
+    grid-template-columns: 1fr;
+    gap: 0;
   }
 }

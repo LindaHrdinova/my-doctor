@@ -102,7 +102,7 @@ export const AddAppointmentForm = ({
               <ErrorMessage
                 name="date"
                 component="p"
-                className="addDoctorForm__errorMessage"
+                className="addForm__errorMessage"
               />
             </label>
             <label className="addForm__label">
@@ -119,18 +119,18 @@ export const AddAppointmentForm = ({
               <ErrorMessage
                 name="time"
                 component="p"
-                className="addDoctorForm__errorMessage"
+                className="addForm__errorMessage"
               />
             </label>
-            <label className="addDoctorForm__label">
+            <label className="addForm__label">
               <span>
                 Specializace <span className="formRequired">*</span>
               </span>
               <AutoComplete
                 className={
                   formik.touched.speciality && formik.errors.speciality
-                    ? 'addDoctor__autoComplete input--error'
-                    : 'addDoctor__autoComplete'
+                    ? 'addForm__autoComplete input--error'
+                    : 'addForm__autoComplete'
                 }
                 value={formik.values.speciality}
                 suggestions={myDoctorListSpec}
@@ -145,7 +145,8 @@ export const AddAppointmentForm = ({
               <ErrorMessage
                 name="speciality"
                 component="p"
-                className="addDoctorForm__errorMessage"
+                className="add
+                Form__errorMessage"
               />
             </label>
             {formik.values.speciality.length > 2 &&
@@ -242,7 +243,7 @@ export const AddAppointmentForm = ({
                 Žádný doktor nenalezen. Chcete přidat nového doktora?
               </Link>
             ) : null}
-            <div className="addForm__buttons ">
+            <div className="addForm__buttons">
               <input
                 type="submit"
                 className="onClick__style button button--primary"

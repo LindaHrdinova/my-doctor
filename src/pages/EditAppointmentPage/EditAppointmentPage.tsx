@@ -115,15 +115,15 @@ export const EditAppointmentPage: React.FC = () => {
                   className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 <span>
                   Specializace <span className="formRequired">*</span>
                 </span>
                 <AutoComplete
                   className={
                     formik.touched.speciality && formik.errors.speciality
-                      ? 'addDoctor__autoComplete input--error'
-                      : 'addDoctor__autoComplete'
+                      ? 'addForm__autoComplete input--error'
+                      : 'addForm__autoComplete'
                   }
                   value={formik.values.speciality}
                   suggestions={myDoctorListSpec}
@@ -138,7 +138,7 @@ export const EditAppointmentPage: React.FC = () => {
                 <ErrorMessage
                   name="speciality"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
 

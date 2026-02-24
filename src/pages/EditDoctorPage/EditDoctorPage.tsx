@@ -76,16 +76,16 @@ export const EditDoctorPage: React.FC = () => {
           }}
         >
           {(formik) => (
-            <Form className="addDoctorForm">
-              <label className="addDoctorForm__label">
+            <Form className="addForm">
+              <label className="addForm__label">
                 <span>
                   Specializace <span className="formRequired">*</span>
                 </span>
                 <AutoComplete
                   className={
                     formik.touched.speciality && formik.errors.speciality
-                      ? 'addDoctor__autoComplete input--error'
-                      : 'addDoctor__autoComplete'
+                      ? 'addForm__autoComplete input--error'
+                      : 'addForm__autoComplete'
                   }
                   value={formik.values.speciality}
                   suggestions={suggestDocSpec}
@@ -97,91 +97,91 @@ export const EditDoctorPage: React.FC = () => {
                 <ErrorMessage
                   name="speciality"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 Jméno
                 <Field
                   name="name"
                   className={
                     formik.touched.name && formik.errors.name
-                      ? 'addDoctorForm__input input--error'
-                      : 'addDoctorForm__input'
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
                   }
                 />
                 <ErrorMessage
                   name="name"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 Adresa
                 <Field
                   name="address"
                   className={
                     formik.touched.address && formik.errors.address
-                      ? 'addDoctorForm__input input--error'
-                      : 'addDoctorForm__input'
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
                   }
                 />
                 <ErrorMessage
                   name="address"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 Detail adresy
                 <Field
                   name="addressDetail"
                   className={
                     formik.touched.addressDetail && formik.errors.addressDetail
-                      ? 'addDoctorForm__input input--error'
-                      : 'addDoctorForm__input'
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
                   }
                 />
                 <ErrorMessage
                   name="addressDetail"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 Telefon
                 <Field
                   name="phone"
                   className={
                     formik.touched.phone && formik.errors.phone
-                      ? 'addDoctorForm__input input--error'
-                      : 'addDoctorForm__input'
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
                   }
                 />
                 <ErrorMessage
                   name="phone"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 E-mail
                 <Field
                   name="email"
                   type="email"
                   className={
                     formik.touched.email && formik.errors.email
-                      ? 'addDoctorForm__input input--error'
-                      : 'addDoctorForm__input'
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
                   }
                 />
                 <ErrorMessage
                   name="email"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
-              <label className="addDoctorForm__label">
+              <label className="addForm__label">
                 <span>
                   Pravidelnost prohlídek <span className="formRequired">*</span>
                 </span>
@@ -190,14 +190,17 @@ export const EditDoctorPage: React.FC = () => {
                   as="select"
                   className={
                     formik.touched.frequency && formik.errors.frequency
-                      ? 'addDoctorForm__input input--error'
-                      : 'addDoctorForm__input'
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
                   }
                   required
                 >
                   {' '}
-                  {doctorFrequencyList.map((doctorFrequency, index) => (
-                    <option value={doctorFrequency.value} key={index}>
+                  {doctorFrequencyList.map((doctorFrequency) => (
+                    <option
+                      value={doctorFrequency.value}
+                      key={doctorFrequency.value}
+                    >
                       {doctorFrequency.textCs}
                     </option>
                   ))}
@@ -205,7 +208,7 @@ export const EditDoctorPage: React.FC = () => {
                 <ErrorMessage
                   name="frequency"
                   component="p"
-                  className="addDoctorForm__errorMessage"
+                  className="addForm__errorMessage"
                 />
               </label>
               {/* TO DO formik.values.frequency === 'other' ? <p>jiné</p> : null*/}
@@ -214,15 +217,15 @@ export const EditDoctorPage: React.FC = () => {
                 formik.values.frequency === 'other' ||
                 formik.values.frequency === ''
               ) ? (
-                <label className="addDoctorForm__label">
+                <label className="addForm__label">
                   Připomínka objednání dalšího termínu:
                   <Field
                     name="reminder"
                     as="select"
                     className={
                       formik.touched.reminder && formik.errors.reminder
-                        ? 'addDoctorForm__input input--error'
-                        : 'addDoctorForm__input'
+                        ? 'addForm__input input--error'
+                        : 'addForm__input'
                     }
                   >
                     {appointmentReminderList.map((appReminder) => (
@@ -234,15 +237,16 @@ export const EditDoctorPage: React.FC = () => {
                   <ErrorMessage
                     name="reminder"
                     component="p"
-                    className="addDoctorForm__errorMessage"
+                    className="addForm__errorMessage"
                   />
                 </label>
               ) : null}
-              <div className="addDoctorForm__buttons ">
+              <div className="addForm__buttons ">
                 <input
                   type="submit"
                   className="onClick__style button button--primary"
                   value="Uložit změny"
+                  disabled={!formik.isValid || !formik.dirty}
                 />
                 <Link to="/doctors" className="onClick__style button">
                   Zpátky na seznam doktorů
