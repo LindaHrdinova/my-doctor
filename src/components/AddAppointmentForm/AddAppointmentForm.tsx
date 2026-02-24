@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { db } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
-import * as Yup from 'yup';
 import { Temporal } from '@js-temporal/polyfill';
 import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
+import { appointmentYupValidationSchema } from '../../validation/formSchemas';
 
 type AddAppointmentFormProps = {
   setAddAppointmentStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -46,15 +46,7 @@ export const AddAppointmentForm = ({
   };
 
   //YUP validation
-  const SignupSchema = Yup.object().shape({
-    date: Yup.date().required('Povinné'),
-    time: Yup.string().matches(
-      /^(\d|[01]\d|2[0-3]):[0-5]\d$/,
-      'Neplatný formát času',
-    ),
-    speciality: Yup.string().required('Povinné'),
-  });
-
+  const SignupSchema = appointmentYupValidationSchema;
   const handleSubmitFormik = async (
     formData: AppointmentFormValues,
     { resetForm }: FormikHelpers<AppointmentFormValues>,

@@ -2,10 +2,10 @@ import { db } from '../../db/db';
 import { useParams, Link } from 'react-router';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
-import * as Yup from 'yup';
 import { AutoComplete } from 'primereact/autocomplete';
 import { useAppointmentsList } from '../../util/appointmentListHook/appointmentListHook';
 import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
+import { appointmentYupValidationSchema } from '../../validation/formSchemas';
 
 export const EditAppointmentPage: React.FC = () => {
   const { idAppointment } = useParams();
@@ -42,15 +42,7 @@ export const EditAppointmentPage: React.FC = () => {
   };
 
   //YUP validation
-  const SignupSchema = Yup.object().shape({
-    date: Yup.date().required('Povinné'),
-    time: Yup.string().matches(
-      /^(\d|[01]\d|2[0-3]):[0-5]\d$/,
-      'Neplatný formát času',
-    ),
-    speciality: Yup.string().required('Povinné'),
-    doctorId: Yup.number(),
-  });
+  const SignupSchema = appointmentYupValidationSchema;
 
   if (!appointentData) {
     return <p>Načítám…</p>;

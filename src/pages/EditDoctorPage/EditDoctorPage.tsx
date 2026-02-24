@@ -5,10 +5,10 @@ import { specialityList } from '../../data/specialityList';
 import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 import { doctorFrequencyList } from '../../data/doctorFrequency';
 import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
 import { appointmentReminderList } from '../../data/appointmentReminder';
+import { doctorYupValidationSchema } from '../../validation/formSchemas';
 
 type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
@@ -31,18 +31,7 @@ export const EditDoctorPage: React.FC = () => {
   };
 
   //YUP validation
-  const SignupSchema = Yup.object().shape({
-    speciality: Yup.string().required('Povinné'),
-    name: Yup.string(),
-    address: Yup.string(),
-    addressDetail: Yup.string(),
-    phone: Yup.string().matches(
-      /^\+?\d{4,15}$/,
-      'Telefon musí mít 4-15 číslic a může začínat +',
-    ),
-    email: Yup.string().email('Neplatný e-mail'),
-    frequency: Yup.string().required('Povinné'),
-  });
+  const SignupSchema = doctorYupValidationSchema;
 
   if (!doctorData) {
     return <p>Načítám…</p>;

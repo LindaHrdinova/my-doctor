@@ -6,8 +6,8 @@ import { doctorFrequencyList } from '../../data/doctorFrequency';
 import { db } from '../../db/db';
 import type { DoctorDataProp } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
-import * as Yup from 'yup';
 import { appointmentReminderList } from '../../data/appointmentReminder';
+import { doctorYupValidationSchema } from '../../validation/formSchemas';
 
 type AddDoctorFormProps = {
   setAddDoctorStatus: React.Dispatch<React.SetStateAction<string>>;
@@ -28,22 +28,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
   };
 
   //YUP validation
-  const SignupSchema = Yup.object().shape({
-    speciality: Yup.string().required('Povinné'),
-    name: Yup.string(),
-    address: Yup.string(),
-    addressDetail: Yup.string(),
-    phone: Yup.string().matches(
-      /^\+?\d{4,15}$/,
-      'Telefon musí mít 4-15 číslic a může začínat +',
-    ),
-    email: Yup.string().email('Neplatný e-mail'),
-    frequency: Yup.string().required('Povinné'),
-    reminder: Yup.string().when('frequency', {
-      is: (val: string) => val !== 'irregular' && val !== 'other' && val !== '',
-      then: (schema) => schema.required('Povinné'),
-    }),
-  });
+  const SignupSchema = doctorYupValidationSchema;
 
   const handleSubmitFormik = async (
     formData: NewDoctorData,
