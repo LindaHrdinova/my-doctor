@@ -22,14 +22,19 @@ export const Doctor: React.FC<DoctorDataProp> = ({
   addressDetail,
   phone,
   email,
+  website,
+  note,
   frequency,
   reminder,
   current,
+  isDemo,
 }) => {
   const [detailHidden, setDetailHidden] = useState<boolean>(true);
 
   const appointmentsFuture = useAppointmentsFutureList();
   const appointmentPast = useAppointmentsPastList();
+  console.log('isDemo');
+  console.log(isDemo);
 
   const thisDocAppFuture = appointmentsFuture?.find(
     (app) => app.doctorId === id,
@@ -86,6 +91,16 @@ export const Doctor: React.FC<DoctorDataProp> = ({
             <strong>E-mail:</strong> <a href={`mailto:${email}`}>{email}</a>
           </li>
         ) : null}
+        {website ? (
+          <li>
+            <strong>Webové stránky:</strong> <a href={website}>{website}</a>
+          </li>
+        ) : null}
+        {note ? (
+          <li>
+            <strong>Poznámka:</strong> <p>{note}</p>
+          </li>
+        ) : null}
         {frequency ? (
           <li>
             <strong>Pravidelnost prohlídek:</strong> {dbDoctorText(frequency)}
@@ -106,7 +121,9 @@ export const Doctor: React.FC<DoctorDataProp> = ({
           ) : (
             <>
               Nenastaveno.{' '}
-              <Link to="/new-appointment">Nastavit příští termín</Link>
+              <Link to={`/new-appointment?doctorId=${id}`}>
+                Nastavit příští termín
+              </Link>
             </>
           )}
         </li>

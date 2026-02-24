@@ -23,9 +23,12 @@ export const PastDoctorPage: React.FC = () => {
             addressDetail={doctor.addressDetail}
             phone={doctor.phone}
             email={doctor.email}
+            website={doctor.website}
+            note={doctor.note}
             frequency={doctor.frequency}
             reminder={doctor.reminder}
             current={doctor.current}
+            isDemo={doctor.isDemo}
           />
         ))}
       <BigButton
