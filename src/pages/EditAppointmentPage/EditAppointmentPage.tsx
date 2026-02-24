@@ -42,7 +42,7 @@ export const EditAppointmentPage: React.FC = () => {
   };
 
   //YUP validation
-  const SignupSchema = appointmentYupValidationSchema;
+  const signupSchema = appointmentYupValidationSchema;
 
   if (!appointentData) {
     return <p>Načítám…</p>;
@@ -58,7 +58,7 @@ export const EditAppointmentPage: React.FC = () => {
             speciality: doctorData?.speciality ?? '',
             doctorId: appointentData.doctorId ?? 0,
           }}
-          validationSchema={SignupSchema}
+          validationSchema={signupSchema}
           onSubmit={async (formData) => {
             try {
               await db.appointments.update(Number(idAppointment), formData);

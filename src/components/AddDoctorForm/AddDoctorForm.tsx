@@ -26,7 +26,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
   };
 
   //YUP validation
-  const SignupSchema = doctorYupValidationSchema;
+  const signupSchema = doctorYupValidationSchema;
 
   const handleSubmitFormik = async (
     formData: NewDoctorData,
@@ -59,7 +59,7 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
           current: 0,
           isDemo: false,
         }}
-        validationSchema={SignupSchema}
+        validationSchema={signupSchema}
         onSubmit={handleSubmitFormik}
       >
         {(formik) => (

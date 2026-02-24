@@ -1,6 +1,6 @@
 import '../../form.css';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { db } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
@@ -27,6 +27,8 @@ export const AddAppointmentForm = ({
   const myDocSpecList = myDoctorList?.map((doc) => doc.speciality) ?? [];
 
   const [myDoctorListSpec, setMyDoctorListSpec] = useState<string[]>([]);
+  const [searchParams] = useSearchParams();
+  const doctorIdUrl = searchParams.get('doctorId');
 
   //SPECIALITY autocomplete "našeptávač"
   const searchSpeciality = (e: { query: string }) => {
@@ -46,7 +48,7 @@ export const AddAppointmentForm = ({
   };
 
   //YUP validation
-  const SignupSchema = appointmentYupValidationSchema;
+  const signupSchema = appointmentYupValidationSchema;
   const handleSubmitFormik = async (
     formData: AppointmentFormValues,
     { resetForm }: FormikHelpers<AppointmentFormValues>,
@@ -62,17 +64,26 @@ export const AddAppointmentForm = ({
       setAddAppointmentStatus('Nepovedlo se přidat termín do diáře.');
     }
   };
-
+  if (doctorIdUrl != null && myDoctorList == null) {
+    return;
+  }
   return (
     <>
       <Formik<AppointmentFormValues>
         initialValues={{
           date: Temporal.Now.plainDateISO().toString(),
           time: '',
-          speciality: '',
-          doctorId: 0,
+          speciality:
+            doctorIdUrl == null
+              ? ''
+              : myDoctorList?.find((doc) => doc.id === Number(doctorIdUrl))
+                  ?.speciality ?? '',
+          doctorId:
+            doctorIdUrl == null
+              ? 0
+              : Number(doctorIdUrl) /* === can return undefined */,
         }}
-        validationSchema={SignupSchema}
+        validationSchema={signupSchema}
         onSubmit={handleSubmitFormik}
       >
         {(formik) => (

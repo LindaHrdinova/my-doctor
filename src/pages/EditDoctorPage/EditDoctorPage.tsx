@@ -29,7 +29,7 @@ export const EditDoctorPage: React.FC = () => {
   };
 
   //YUP validation
-  const SignupSchema = doctorYupValidationSchema;
+  const signupSchema = doctorYupValidationSchema;
 
   if (!doctorData) {
     return <p>Načítám…</p>;
@@ -54,10 +54,12 @@ export const EditDoctorPage: React.FC = () => {
             current: doctorData.current ?? 0,
             isDemo: doctorData.isDemo ?? false,
           }}
-          validationSchema={SignupSchema}
+          validationSchema={signupSchema}
           onSubmit={async (formData) => {
             try {
-              await db.doctors.update(Number(idDoctor), formData);
+              const validatedData = await signupSchema.validate(formData);
+
+              await db.doctors.update(Number(idDoctor), validatedData);
               setEditDoctorStatus(`Údaje byly úspěšně uloženy!`);
             } catch (error) {
               setEditDoctorStatus(`Došlo k chybě a údaje se neuložily.`);
@@ -175,7 +177,7 @@ export const EditDoctorPage: React.FC = () => {
                 Webové stránky
                 <Field
                   name="website"
-                  type="url"
+                  type="string"
                   className={
                     formik.touched.website && formik.errors.website
                       ? 'addForm__input input--error'
