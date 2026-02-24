@@ -3,14 +3,12 @@ import { Link, useParams } from 'react-router';
 import { AutoComplete } from 'primereact/autocomplete';
 import { specialityList } from '../../data/specialityList';
 import { db } from '../../db/db';
-import type { DoctorDataProp } from '../../db/db';
+import type { NewDoctorData } from '../../db/db';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { doctorFrequencyList } from '../../data/doctorFrequency';
 import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
 import { appointmentReminderList } from '../../data/appointmentReminder';
 import { doctorYupValidationSchema } from '../../validation/formSchemas';
-
-type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from "initialValues".
 
 export const EditDoctorPage: React.FC = () => {
   const { idDoctor } = useParams();
@@ -49,9 +47,12 @@ export const EditDoctorPage: React.FC = () => {
             addressDetail: doctorData.addressDetail ?? '',
             phone: doctorData.phone ?? '',
             email: doctorData.email ?? '',
+            website: doctorData.website ?? '',
+            note: doctorData.note ?? '',
             reminder: doctorData.reminder ?? '',
             frequency: doctorData.frequency ?? '',
             current: doctorData.current ?? 0,
+            isDemo: doctorData.isDemo ?? false,
           }}
           validationSchema={SignupSchema}
           onSubmit={async (formData) => {
@@ -171,6 +172,40 @@ export const EditDoctorPage: React.FC = () => {
                 />
               </label>
               <label className="addForm__label">
+                Webové stránky
+                <Field
+                  name="website"
+                  type="url"
+                  className={
+                    formik.touched.website && formik.errors.website
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
+                  }
+                />
+                <ErrorMessage
+                  name="website"
+                  component="p"
+                  className="addForm__errorMessage"
+                />
+              </label>
+              <label className="addForm__label">
+                Poznámka
+                <Field
+                  name="note"
+                  as="textarea"
+                  className={
+                    formik.touched.note && formik.errors.note
+                      ? 'addForm__input input--error'
+                      : 'addForm__input'
+                  }
+                />
+                <ErrorMessage
+                  name="note"
+                  component="p"
+                  className="addForm__errorMessage"
+                />
+              </label>
+              <label className="addForm__label">
                 <span>
                   Pravidelnost prohlídek <span className="formRequired">*</span>
                 </span>
@@ -207,7 +242,10 @@ export const EditDoctorPage: React.FC = () => {
                 formik.values.frequency === ''
               ) ? (
                 <label className="addForm__label">
-                  Připomínka objednání dalšího termínu:
+                  <span>
+                    Připomínka objednání dalšího termínu
+                    <span className="formRequired"> *</span>
+                  </span>
                   <Field
                     name="reminder"
                     as="select"

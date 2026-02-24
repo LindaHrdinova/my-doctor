@@ -8,10 +8,15 @@ interface DoctorDataProp {
   addressDetail: string;
   phone: string;
   email: string;
+  website: string;
+  note: string;
   frequency: string;
   reminder: string;
   current: number /* 0 true, 1 false*/;
+  isDemo: boolean;
 }
+
+type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from
 
 interface AppointmentDataProp {
   id: number;
@@ -26,9 +31,9 @@ const db = new Dexie('myDoctor') as Dexie & {
 };
 db.version(1).stores({
   doctors:
-    'id++, speciality, name, address, addressDetail, phone, email, frequency, reminder, current, [current+speciality]',
+    'id++, speciality, name, address, addressDetail, phone, email, website, note, frequency, reminder, current, isDemo, [current+speciality]',
   appointments: 'id++, date, time, doctorId, [date+time]',
 });
 
-export type { DoctorDataProp, AppointmentDataProp };
+export type { DoctorDataProp, AppointmentDataProp, NewDoctorData };
 export { db };

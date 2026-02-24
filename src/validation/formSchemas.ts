@@ -10,6 +10,8 @@ export const doctorYupValidationSchema = Yup.object().shape({
     'Telefon musí mít 4-15 číslic a může začínat +',
   ),
   email: Yup.string().email('Neplatný e-mail'),
+  website: Yup.string().url('Neplatná URL'),
+  note: Yup.string(),
   frequency: Yup.string().required('Povinné'),
   reminder: Yup.string().when('frequency', {
     is: (val: string) => val !== 'irregular' && val !== 'other' && val !== '',
