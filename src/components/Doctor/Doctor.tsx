@@ -13,6 +13,7 @@ import {
 import { humanDate } from '../../util/humanDate/humanDate';
 import type { DoctorDataProp } from '../../db/db';
 import { appointmentTextReminder } from '../../text/appointmentReminderText';
+import { Temporal } from '@js-temporal/polyfill';
 
 export const Doctor: React.FC<DoctorDataProp> = ({
   id,
@@ -33,22 +34,66 @@ export const Doctor: React.FC<DoctorDataProp> = ({
 
   const appointmentsFuture = useAppointmentsFutureList();
   const appointmentPast = useAppointmentsPastList();
-  console.log('isDemo');
-  console.log(isDemo);
+
+  const todayDate = Temporal.Now.plainDateISO();
 
   const thisDocAppFuture = appointmentsFuture?.find(
     (app) => app.doctorId === id,
   );
   const thisDocAppPast = appointmentPast?.find((app) => app.doctorId === id);
+  console.log(thisDocAppFuture);
+
+  let reminderNote = null;
+
+  let doctorClass = 'doctor';
+  if (
+    !thisDocAppPast ||
+    thisDocAppFuture ||
+    frequency === 'other' ||
+    frequency === 'irregular' ||
+    reminder === 'no' ||
+    reminder === 'other' ||
+    current === 1
+  ) {
+    doctorClass = 'doctor';
+  } else {
+    const frequencyParsed = JSON.parse(frequency);
+    const reminderParsed = JSON.parse(reminder);
+
+    const lastVisit = Temporal.PlainDate.from(thisDocAppPast.date);
+
+    const nextVisit = lastVisit.add({
+      [frequencyParsed.unit]: frequencyParsed.amount,
+    });
+
+    const notificationDate = nextVisit.subtract({
+      [reminderParsed.unit]: reminderParsed.amount,
+    });
+    const compareNotification = Temporal.PlainDate.compare(
+      todayDate,
+      notificationDate,
+    );
+
+    const compareNextVisit = Temporal.PlainDate.compare(todayDate, nextVisit);
+
+    if (compareNextVisit >= 0) {
+      doctorClass = 'doctor doctor--late';
+    } else if (compareNotification >= 0) {
+      doctorClass = 'doctor doctor--soon';
+    } else {
+      doctorClass = 'doctor';
+    }
+  }
 
   return (
-    <div className="doctor">
+    <div className={doctorClass}>
       <h3
         className="doctor__title onClick__style"
         onClick={() => setDetailHidden(!detailHidden)}
       >
-        {speciality}
+        {speciality} {doctorClass !== 'doctor' ? '- objednat se' : null}
         <span>
+          {isDemo && <span className="isDemo">demo</span>}
           {detailHidden ? <IoMdArrowDropdown /> : <IoMdArrowDropup />}
         </span>
       </h3>
@@ -98,7 +143,7 @@ export const Doctor: React.FC<DoctorDataProp> = ({
         ) : null}
         {note ? (
           <li>
-            <strong>Poznámka:</strong> <p>{note}</p>
+            <strong>Poznámka:</strong> {note}
           </li>
         ) : null}
         {frequency ? (
