@@ -26,6 +26,13 @@
   --blackDark-color: #111111;
   /*18b8a3*/
 
+  /* Warning */
+  --warning_Mid-Dark-color: #823b09;
+  --warning_Mid-Light-color: #f5d8a2;
+  ;
+  --warning_Hard-Dark-color: #781404;
+  --warning_Hard-Light-color: #f5b4a2;
+
   --box-shadow: 0 0 10px #0003;
 
   font-synthesis: none;
@@ -35,7 +42,7 @@
 
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #ffffffde;
   background-color: var(--blackDark-color);
 }
 

@@ -43,8 +43,6 @@ export const Doctor: React.FC<DoctorDataProp> = ({
   const thisDocAppPast = appointmentPast?.find((app) => app.doctorId === id);
   console.log(thisDocAppFuture);
 
-  let reminderNote = null;
-
   let doctorClass = 'doctor';
   if (
     !thisDocAppPast ||

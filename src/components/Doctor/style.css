@@ -9,13 +9,13 @@
 }
 
 .doctor--late {
-  background-color: rgb(120, 20, 4);
-  color: rgb(245, 180, 162);
+  background-color: var(--warning_Hard-Dark-color);
+  color: var(--warning_Hard-Light-color)
 }
 
 .doctor--soon {
-  background-color: rgb(130, 59, 9);
-  color: rgb(245, 216, 162);
+  background-color: var(--warning_Mid-Dark-color);
+  color: var(--warning_Mid-Light-color);
 }
 
 
@@ -27,11 +27,11 @@
 }
 
 .doctor--late>.doctor__title {
-  border-color: rgb(245, 180, 162);
+  border-color: var(--warning_Hard-Light-color);
 }
 
 .doctor--soon>.doctor__title {
-  border-color: rgb(245, 216, 162);
+  border-color: var(--warning_Mid-Light-color);
 }
 
 .doctor--inactive {
@@ -93,20 +93,20 @@
   }
 
   .doctor--late {
-    background-color: rgb(245, 180, 162);
-    color: rgb(120, 20, 4);
+    background-color: var(--warning_Hard-Light-color);
+    color: var(--warning_Hard-Dark-color)
   }
 
   .doctor--soon {
-    background-color: rgb(245, 216, 162);
-    color: rgb(130, 59, 9);
+    background-color: var(--warning_Mid-Light-color);
+    color: var(--warning_Mid-Dark-color);
   }
 
   .doctor--late>.doctor__title {
-    border-color: rgb(120, 20, 4);
+    border-color: var(--warning_Hard-Dark-color)
   }
 
   .doctor--soon>.doctor__title {
-    border-color: rgb(130, 59, 9);
+    border-color: var(--warning_Mid-Dark-color);
   }
 }

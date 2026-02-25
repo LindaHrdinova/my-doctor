@@ -8,13 +8,13 @@
 }
 
 .appointment--today {
-  background-color: rgb(120, 20, 4);
-  color: rgb(245, 180, 162);
+  background-color: var(--warning_Hard-Dark-color);
+  color: var(--warning_Hard-Light-color)
 }
 
 .appointment--tomorrow {
-  background-color: rgb(130, 59, 9);
-  color: rgb(245, 216, 162);
+  background-color: var(--warning_Mid-Dark-color);
+  color: var(--warning_Mid-Light-color);
 }
 
 .appointment__title {
@@ -28,12 +28,12 @@
   }
 
   .appointment--today {
-    background-color: rgb(245, 180, 162);
-    color: rgb(120, 20, 4)
+    background-color: var(--warning_Hard-Light-color);
+    color: var(--warning_Hard-Dark-color);
   }
 
   .appointment--tomorrow {
-    background-color: rgb(245, 216, 162);
-    color: rgb(130, 59, 9);
+    background-color: var(--warning_Mid-Light-color);
+    color: var(--warning_Mid-Dark-color);
   }
 }
