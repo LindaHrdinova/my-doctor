@@ -33,7 +33,11 @@ export const AddDoctorForm = ({ setAddDoctorStatus }: AddDoctorFormProps) => {
     { resetForm }: FormikHelpers<NewDoctorData>,
   ) => {
     try {
-      await db.doctors.add(formData);
+      const validatedData = await signupSchema.validate(formData, {
+        stripUnknown: true,
+      });
+
+      await db.doctors.add(validatedData);
       setAddDoctorStatus(`Nový doktor byl přidán do adresáře!`);
       resetForm();
     } catch (error) {

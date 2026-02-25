@@ -57,7 +57,9 @@ export const EditDoctorPage: React.FC = () => {
           validationSchema={signupSchema}
           onSubmit={async (formData) => {
             try {
-              const validatedData = await signupSchema.validate(formData);
+              const validatedData = await signupSchema.validate(formData, {
+                stripUnknown: true,
+              });
 
               await db.doctors.update(Number(idDoctor), validatedData);
               setEditDoctorStatus(`Údaje byly úspěšně uloženy!`);
