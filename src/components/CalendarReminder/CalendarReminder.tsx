@@ -29,18 +29,23 @@ export const CalendarReminder: React.FC<calendarReminder> = ({
     description: `Kontrola u doktora ${name ?? ''}`,
   };
 
+  const plain = Temporal.PlainDate.from(date);
+
+  const formatForGoogle = (d: Temporal.PlainDate) =>
+    d.toString().replaceAll('-', '');
+
   const event = {
     ...baseEvent,
     ...(time
       ? {
           start: `${date}T${timeStart}`,
-          end: `${date}}T${timeEnd}`,
+          end: `${date}T${timeEnd}`,
         }
       : {
-          start: date,
-          end: Temporal.PlainDate.from(date)
-            .add({ days: 1 })
-            .toString() /* allDay needs end a day later*/,
+          start: formatForGoogle(plain.add({ days: 1 })),
+          end: formatForGoogle(
+            plain.add({ days: 2 }),
+          ) /* allDay needs end a day later*/,
           allDay: true,
         }),
     ...(address && { location: address }),
