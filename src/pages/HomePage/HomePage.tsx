@@ -1,8 +1,24 @@
+import { useEffect, useState } from 'react';
 import { BigButton } from '../../components/BigButton/BigButton';
 import { NextAppointment } from '../../components/NextAppointment/NextAppointment';
 import { TestDataFiller } from '../../components/TestDataFiller/TestDataFiller';
+import { db } from '../../db/db';
 
 export const HomePage: React.FC = () => {
+  const [demoOn, setDemoOn] = useState<boolean>(false);
+  const [addDoctorStatus, setAddDoctorStatus] = useState<string>('');
+  useEffect(() => {
+    const checkDemo = async () => {
+      const count = await db.doctors
+        .filter((doctor) => doctor.isDemo === true)
+        .count();
+
+      setDemoOn(count > 0);
+    };
+
+    checkDemo();
+  }, []);
+
   return (
     <main>
       <h2>Homepage</h2>
@@ -28,7 +44,12 @@ export const HomePage: React.FC = () => {
         primaryButton={true}
       />
 
-      <TestDataFiller />
+      <TestDataFiller
+        setDemoOn={setDemoOn}
+        demoOn={demoOn}
+        setAddDoctorStatus={setAddDoctorStatus}
+      />
+      {addDoctorStatus}
     </main>
   );
 };

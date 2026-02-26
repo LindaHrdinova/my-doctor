@@ -13,7 +13,7 @@ interface DoctorDataProp {
   frequency: string;
   reminder: string;
   current: number /* 0 true, 1 false*/;
-  isDemo: boolean;
+  isDemo: boolean /* 0 true, 1 false*/;
 }
 
 type NewDoctorData = Omit<DoctorDataProp, 'id'>; //remove "id" from DoctorDataProp so I can leave it from
