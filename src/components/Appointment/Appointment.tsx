@@ -9,6 +9,7 @@ import { dbDoctorText } from '../../text/dbDoctorText';
 import { humanDate } from '../../util/humanDate/humanDate';
 import { Temporal } from '@js-temporal/polyfill';
 import { useDoctorList } from '../../util/doctorListHook/doctorListHook';
+import { CalendarReminder } from '../CalendarReminder/CalendarReminder';
 
 export const Appointment: React.FC<AppointmentDataProp> = ({
   id,
@@ -100,6 +101,15 @@ export const Appointment: React.FC<AppointmentDataProp> = ({
             </li>
           ) : null}
           <span className="doctor__menu">
+            {date && (
+              <CalendarReminder
+                speciality={doctorData?.speciality}
+                name={doctorData?.name}
+                address={doctorData?.address}
+                time={time}
+                date={date}
+              />
+            )}
             <Link to={`/appointments/${id}`}>
               <MdEdit className="doctor__icon" />
             </Link>
